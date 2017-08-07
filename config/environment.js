@@ -45,6 +45,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.rootURL = '/Nike/';
+    ENV.baseURL = '/Nike/';    
     ENV.locationType = 'hash';
   }
 
