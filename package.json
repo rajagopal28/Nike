@@ -23,6 +23,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
+    "build.prod" : "ember build --environment production",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "directories": {
