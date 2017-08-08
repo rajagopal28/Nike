@@ -23,7 +23,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "build.prod" : "ember build --environment production",
+    "build.prod": "ember build --environment production",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "directories": {
@@ -50,7 +50,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.14.1",
-    "ember-welcome-page": "^3.0.0",
+    "emberfire": "^2.0.7",
     "loader.js": "^4.2.3"
   },
   "engines": {

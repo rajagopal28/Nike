@@ -3,6 +3,12 @@
 
 module.exports = function(environment) {
   let ENV = {
+    firebase: {
+      apiKey: 'xyz',
+     authDomain: 'YOUR-FIREBASE-APP.firebaseapp.com',
+     databaseURL: 'https://YOUR-FIREBASE-APP.firebaseio.com',
+     storageBucket: 'YOUR-FIREBASE-APP.appspot.com',
+    },
     modulePrefix: 'nike',
     environment,
     rootURL: '/',
@@ -44,7 +50,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/Nike/'; 
+    ENV.rootURL = '/Nike/';
     ENV.locationType = 'hash';
   }
 
