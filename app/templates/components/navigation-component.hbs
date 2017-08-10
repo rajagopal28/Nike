@@ -27,10 +27,10 @@
     lockedOpen=leftSideBarLockedOpen
     onToggle=(action (mut leftSideBarOpen))}}
     {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}Left Sidenav{{/paper-toolbar-tools}}
+      {{#paper-toolbar-tools}}{{#link-to "home"}}Home{{/link-to}}{{/paper-toolbar-tools}}
     {{/paper-toolbar}}
     {{#paper-content padding=true}}
-      Çup?
+      {{#link-to "home.labels"}} Labels {{/link-to}}
     {{/paper-content}}
   {{/paper-sidenav}}
   {{#paper-card-content class="flex"}}
