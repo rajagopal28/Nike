@@ -1,6 +1,7 @@
 {{#navigation-component}}
 <div class="layout-fill layout-align-start-center layout-column" style="height: 500px">
-  <h2>List of Scientists</h2>
+  {{outlet}}
+  <h2>List of Users</h2>
   <ul>
     {{#each model as |scientist|}}
       <li>{{scientist.displayName}}</li>

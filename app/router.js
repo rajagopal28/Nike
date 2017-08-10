@@ -7,7 +7,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('home');
+  this.route('home', { path: '/'}, function() {
+    this.route('labels');
+  });
+
 });
 
 export default Router;
