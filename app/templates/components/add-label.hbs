@@ -1,1 +1,5 @@
+<div class="layout layout-sm-column">
+  {{paper-input class="flex" label="Label text" type="text" value=displayText onChange=(action (mut displayText))}}
+  {{#paper-button primary=true onClick=(action "addLabel")}}Add Label{{/paper-button}}
+</div>
 {{yield}}
