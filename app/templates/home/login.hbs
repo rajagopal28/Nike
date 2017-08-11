@@ -1,0 +1,10 @@
+{{#if session.isAuthenticated}}
+  Logged in as {{session.currentUser.displayName}}
+  {{#paper-button primary=true onClick=(route-action "signOut")}}Sign out{{/paper-button}}
+  {{outlet}}
+{{else}}
+
+  {{#paper-button primary=true onClick=(route-action "signIn" "github")}}Sign in with Twitter {{/paper-button}}
+{{/if}}
+
+{{outlet}}
