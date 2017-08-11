@@ -26,10 +26,13 @@
     lockedOpen=leftSideBarLockedOpen
     onToggle=(action (mut leftSideBarOpen))}}
     {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}{{#link-to "home"}}Home{{/link-to}}{{/paper-toolbar-tools}}
+      {{#paper-toolbar-tools}}<a href=/>Home</a>{{/paper-toolbar-tools}}
     {{/paper-toolbar}}
     {{#paper-content padding=true}}
-      {{#link-to "home.labels"}} Labels {{/link-to}}
+      {{#link-to "labels"}} Labels {{/link-to}}
+    {{/paper-content}}
+    {{#paper-content padding=true}}
+      {{#link-to "login"}} Login {{/link-to}}
     {{/paper-content}}
   {{/paper-sidenav}}
   {{#paper-card-content class="flex"}}

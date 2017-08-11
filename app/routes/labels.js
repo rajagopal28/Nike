@@ -1,8 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  session: Ember.inject.service('session'),
   model() {
-   return this.store.findAll('label');
+   if(this.session.uuid) {
+     return this.store.findAll('label');
+   }
+   return [];
  },
  getNameFromValue: function(text) {
    if(text && text.trim().length > 0) {
@@ -19,6 +23,9 @@ export default Ember.Route.extend({
        addedOn: new Date().getTime()
      });
      newLabel.save();
-    }
+   },
+   accessDenied() {
+     this.transitionTo('login');
+   }
   }
 });
