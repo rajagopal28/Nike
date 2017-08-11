@@ -8,6 +8,15 @@ module.exports = function(environment) {
      authDomain: 'YOUR-FIREBASE-APP.firebaseapp.com',
      databaseURL: 'https://YOUR-FIREBASE-APP.firebaseio.com',
      storageBucket: 'YOUR-FIREBASE-APP.appspot.com',
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'github-oauth2': {
+          apiKey: '<Client-Id>',
+          redirectUri: 'https://rajagopal28.github.io/Nike',
+          scope: 'user'
+        }
+    }
     },
     modulePrefix: 'nike',
     environment,
@@ -36,6 +45,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.torii.providers['github-oauth2'].redirectUri = 'http://localhost:4200/login';
   }
 
   if (environment === 'test') {
