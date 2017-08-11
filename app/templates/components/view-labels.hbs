@@ -1,1 +1,9 @@
+<div class="all-labels">
+  <h2>List of Labels-New</h2>
+  <ul>
+    {{#each model as |label|}}
+      <li>{{label.displayName}}</li>
+    {{/each}}
+  </ul>
+</div>
 {{yield}}
