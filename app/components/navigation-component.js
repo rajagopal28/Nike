@@ -6,6 +6,9 @@ export default Ember.Component.extend({
     toggle(leftSideBarLockedOpen) {
       console.log('sdflksdfjskldfj', leftSideBarLockedOpen);
       this.set('leftSideBarLockedOpen', !leftSideBarLockedOpen);
+    },
+    logout() {
+      this.sendAction('signOutAction');
     }
   }
 });

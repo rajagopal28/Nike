@@ -1,4 +1,4 @@
-{{#navigation-component}}
+{{#navigation-component signOutAction=(route-action "signOut") isAuthenticated=session.isAuthenticated}}
 <div class="layout-fill layout-align-start-center layout-column" style="height: 500px">
   {{outlet}}
   {{#if session.isAuthenticated}}
