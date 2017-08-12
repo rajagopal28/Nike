@@ -7,7 +7,8 @@ module.exports = function(environment) {
       apiKey: 'xyz',
      authDomain: 'YOUR-FIREBASE-APP.firebaseapp.com',
      databaseURL: 'https://YOUR-FIREBASE-APP.firebaseio.com',
-     storageBucket: 'YOUR-FIREBASE-APP.appspot.com',
+     storageBucket: 'YOUR-FIREBASE-APP.appspot.com'
+   },
     torii: {
       sessionServiceName: 'session',
       providers: {
@@ -16,7 +17,7 @@ module.exports = function(environment) {
           redirectUri: 'https://rajagopal28.github.io/Nike',
           scope: 'user'
         }
-    }
+      }
     },
     modulePrefix: 'nike',
     environment,
