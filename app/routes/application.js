@@ -1,18 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  session: Ember.inject.service('session'),
   beforeModel: function() {
     let _self = this;
     return this.get('session').fetch().catch(function() {
         console.log('not auth in home');
-        _self.transitionTo('login');
     });
   },
   model() {
-    if (this.session.isAuthenticated) {
+    console.log('session',this.session,  this.get('session.uid'));
+    if (this.get('session.uid')) {
       return this.store.findAll('user');
     }
     return [];
+ },
+ actions: {
+   signIn: function(provider) {
+     console.log('sigining in', provider);
+     this.get('session').open('firebase', { provider: provider}).then(function(data) {
+       console.log('user load');
+       console.log(data.currentUser);
+     });
+   },
+   signOut: function() {
+     this.get('session').close();
+   }
  }
 });

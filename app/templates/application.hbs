@@ -1,11 +1,17 @@
 {{#navigation-component}}
 <div class="layout-fill layout-align-start-center layout-column" style="height: 500px">
   {{outlet}}
-  <h2>List of Users</h2>
-  <ul>
-    {{#each model as |scientist|}}
-      <li>{{scientist.displayName}}</li>
-    {{/each}}
-  </ul>
+  {{#if session.isAuthenticated}}
+      {{#paper-button primary=true onClick=(route-action "signOut")}}Sign out{{/paper-button}}
+    <h2>List of Users</h2>
+    <ul>
+      {{#each model as |scientist|}}
+        <li>{{scientist.displayName}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  {{#unless session.isAuthenticated}}
+    {{#login-component loginAction=(route-action "signIn") session=session logoutAction=(route-action "signOut") }}{{/login-component}}
+  {{/unless}}
 </div>
 {{/navigation-component}}

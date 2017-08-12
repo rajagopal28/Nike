@@ -1,9 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  session: Ember.inject.service('session'),
   model() {
-   if(this.session.uuid) {
+   if(this.get('session.uid')) {
      return this.store.findAll('label');
    }
    return [];
