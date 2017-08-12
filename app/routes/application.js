@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   beforeModel: function() {
-    let _self = this;
     return this.get('session').fetch().catch(function() {
         console.log('not auth in home');
     });
