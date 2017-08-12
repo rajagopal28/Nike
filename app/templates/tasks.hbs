@@ -1,7 +1,9 @@
 <h2>List of Tasks</h2>
 <ul>
-  {{#each model as |task|}}
+  {{#each model.tasks as |task|}}
     <li>{{task.title}}</li>
   {{/each}}
 </ul>
+<span> USer sdfdfsdf {{model.user.name}} </span>
+{{#add-task addNewTask=(route-action "addTask") store=store user=model.user}} {{/add-task}}
 {{outlet}}
