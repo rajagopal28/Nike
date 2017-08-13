@@ -5,7 +5,9 @@ export default Ember.Route.extend(FindQuery, {
   model() {
    if(this.get('session.uid')) {
      return Ember.RSVP.hash({
-       user: this.store.query('user', {orderBy : 'uid', equalTo: this.get('session.uid')}),
+       user: this.store.query('user', {orderBy : 'uid', equalTo: this.get('session.uid')}).then(function(users){
+         return users.get('firstObject');
+       }),
        tasks:  this.store.findAll('task')
      });
    }
