@@ -4,6 +4,5 @@
     <li>{{task.title}}</li>
   {{/each}}
 </ul>
-<span> User Name: {{model.user.displayName}} </span>
-{{#add-task addNewTask=(route-action "addTask") store=store user=model.user}} {{/add-task}}
+{{#add-task addNewTask=(route-action "addTask") store=store}} {{/add-task}}
 {{outlet}}
