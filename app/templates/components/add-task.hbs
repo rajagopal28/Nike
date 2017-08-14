@@ -1,6 +1,7 @@
 <div class="layout layout-sm-column">
-  {{paper-input class="flex" label="Title Text" type="text" value=title onChange=(action (mut title))}}
-  {{paper-input class="flex" label="Description Text" type="text" value=description onChange=(action (mut description))}}
+  {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
+  {{paper-input class="flex" label="Description Text" type="text" value=task.description onChange=(action (mut task.description))}}
+  {{pikaday-input class="flex" placeholder="Due date of task" onSelection=(action (mut task.dueDate))}}
   {{#paper-button primary=true onClick=(action "addTask")}}Add Label{{/paper-button}}
 </div>
 {{yield}}

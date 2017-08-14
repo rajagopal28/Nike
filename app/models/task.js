@@ -5,5 +5,6 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   dateCreated: DS.attr('number'),
   dateModified: DS.attr('number'),
+  dueDate: DS.attr('number'),
   user: DS.belongsTo('user')
 });

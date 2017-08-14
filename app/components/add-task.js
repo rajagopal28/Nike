@@ -1,18 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  task: {
+    title: '',
+    description: '',
+    dueDate: new Date()
+  },
   actions: {
     addTask() {
-     console.log('in component add task');
+     console.log('in component add task', this.task);
      let now = new Date().getTime();
      this.sendAction('addNewTask', {
-       title: this.title,
-       description: this.description,
+       title: this.task.title,
+       description: this.task.description,
+       dueDate: this.task.dueDate,
        dateCreated: now,
        dateModifited: now
      });
-     this.set('title', '');
-     this.set('description', '');
+     this.set('task.title', '');
+     this.set('task.description', '');
     }
   }
 });
