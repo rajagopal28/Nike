@@ -25,7 +25,7 @@ export default Ember.Service.extend({
       console.log('setting auth user');
       let _self = this;
       this.set('isLoading', false);
-      this.get('store').query('user', {orderBy : 'uid', equalTo: this.get('session.uid')}).then(function(users){
+      this.get('store').query('user', {orderBy : 'uid', equalTo: this.get('session.uid')}).then((users) => {
         let user = users.get('firstObject');
         if(user) {
           _self.set('authenticatedUser', {isUserAuthourized: true, user: user});

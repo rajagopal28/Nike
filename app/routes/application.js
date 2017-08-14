@@ -2,9 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   authentication: Ember.inject.service(),
-  beforeModel: function() {
+  beforeModel() {
     this.get('authentication');
-    return this.get('session').fetch().catch(function() {
+    return this.get('session').fetch().catch(() => {
         console.log('not auth in home');
     });
   },
@@ -17,16 +17,16 @@ export default Ember.Route.extend({
     return [];
  },
  actions: {
-   signIn: function(provider) {
+   signIn(provider) {
      console.log('sigining in', provider);
      let authService = this.get('authentication');
-     this.get('session').open('firebase', { provider: provider}).then(function(data) {
+     this.get('session').open('firebase', { provider: provider}).then((data) => {
        console.log('user load');
        console.log(data.currentUser);
        authService.setAuthenticatedUser(data.currentUser.uid);
      });
    },
-   signOut: function() {
+   signOut() {
      this.get('session').close();
    }
  }

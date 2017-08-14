@@ -7,7 +7,7 @@ export default Ember.Route.extend(FindQuery, {
    if(this.get('session.uid')) {
      let authService = this.get('authentication');
      return Ember.RSVP.hash({
-       tasks: new Ember.RSVP.Promise(function(resolve, reject) {
+       tasks: new Ember.RSVP.Promise((resolve, reject) => {
          let user = authService.getUser();
          resolve(user ? user.get('tasks') : {});
          reject({error: 'cant find something'});
@@ -21,9 +21,7 @@ export default Ember.Route.extend(FindQuery, {
      let user = this.get('authentication').getUser();
      let taskItem = this.store.createRecord('task', task);
      user.get('tasks').addObject(taskItem);
-     taskItem.save().then(function(){
-       user.save();
-     });
+     taskItem.save().then(() => user.save());
    }
  }
 });
