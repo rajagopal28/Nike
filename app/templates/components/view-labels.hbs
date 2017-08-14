@@ -1,9 +1,19 @@
 <div class="all-labels">
-  <h2>List of Labels-New</h2>
-  <ul>
-    {{#each model as |label|}}
-      <li>{{label.displayName}}</li>
-    {{/each}}
-  </ul>
+  {{#paper-subheader}} List Of Labels {{/paper-subheader}}
+  {{#each  model as |label|}}
+    {{#paper-item as |controls|}}
+      {{controls.checkbox value=label.checked onChange=(action (mut label.checked))}}
+      <div class="md-list-item-text">
+        <p>{{label.displayName}}</p>
+        <h4>{{label.name}}</h4>
+        <h5>Added on: {{label.addedOn}}</h5>
+      </div>
+      <div class="md-secondary-container">
+        {{#controls.button secondary=true iconButton=true onClick=(action "editLabel" label)}}
+          {{paper-icon "mode-edit"}}
+        {{/controls.button}}
+      </div>
+    {{/paper-item}}
+  {{/each}}
 </div>
 {{yield}}
