@@ -1,11 +1,11 @@
 
 {{#paper-toolbar}}
   {{#paper-toolbar-tools}}
-    {{#paper-button iconButton=true onClick=(action "toggle" leftSideBarLockedOpen)}}
+    {{#paper-button iconButton=true onClick=(action "toggle" 'leftSideBarLockedOpen')}}
       {{paper-icon "menu"}}
     {{/paper-button}}
     <h2>
-      Toolbar with Icon Buttons
+      Nike - JustDoIt
     </h2>
     <span class="flex"></span>
     {{#if isAuthenticated}}
@@ -26,15 +26,20 @@
     name="left2"
     open=leftSideBarOpen
     lockedOpen=leftSideBarLockedOpen
+    isLockedOpen=leftSideBarLockedOpen
     onToggle=(action (mut leftSideBarOpen))}}
     {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}  {{#link-to "tasks"}} Home {{/link-to}}{{/paper-toolbar-tools}}
+      {{#paper-toolbar-tools}}  {{#paper-button onClick=(action "transitionTo" "tasks")}} Home {{/paper-button}}{{/paper-toolbar-tools}}
     {{/paper-toolbar}}
     {{#paper-content padding=true}}
-      {{#link-to "labels"}} Labels {{/link-to}}
-    {{/paper-content}}
-    {{#paper-content padding=true}}
-      {{#link-to "labels"}} Login {{/link-to}}
+      {{#paper-list}}
+        {{#paper-item}}
+          {{#paper-button onClick=(action "transitionTo" "labels")}}First Link{{/paper-button}}
+        {{/paper-item}}
+        {{#paper-item}}
+         {{#paper-button onClick=(action "transitionTo" "tasks")}} Second Link{{/paper-button}}
+        {{/paper-item}}
+     {{/paper-list}}
     {{/paper-content}}
   {{/paper-sidenav}}
   {{#paper-card-content class="flex"}}
