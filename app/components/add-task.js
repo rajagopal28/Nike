@@ -4,13 +4,13 @@ export default Ember.Component.extend({
   actions: {
     addTask() {
      console.log('in component add task');
-     console.log(this.get('user'));
+     let now = new Date().getTime();
      this.sendAction('addNewTask', {
        title: this.title,
        description: this.description,
-       dateCreated: new Date().getTime(),
-       dateModifited: new Date().getTime()
-     }, this.get('user'));
+       dateCreated: now,
+       dateModifited: now
+     });
      this.set('title', '');
      this.set('description', '');
     }
