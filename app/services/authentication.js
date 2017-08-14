@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
-  authenticatedUser: null,
+  isLoading : false,
+  authenticatedUser:  {isUserAuthourized : false},
 
   init() {
     this._super(...arguments);
     console.log('in auth service init');
-    this.reset();
   },
   isUserAuthourized() {
     return this.get('authenticatedUser.isUserAuthourized');
@@ -16,18 +16,21 @@ export default Ember.Service.extend({
     return this.get('authenticatedUser.user');
   },
   reset() {
-    this.set('authenticatedUser', {isUserAuthourized : false});
+    if(!this.isLoading) {
+      this.set('authenticatedUser', {isUserAuthourized : false});
+    }
   },
   setAuthenticatedUser(userUid) {
-    console.log('uid', userUid);
     if(this.get('store')) {
-      console.log('store irrukku...');
+      console.log('setting auth user');
       let _self = this;
+      this.set('isLoading', false);
       this.get('store').query('user', {orderBy : 'uid', equalTo: this.get('session.uid')}).then(function(users){
         let user = users.get('firstObject');
         if(user) {
           _self.set('authenticatedUser', {isUserAuthourized: true, user: user});
         }
+        _self.set('isLoading', false);
       })
 
     }

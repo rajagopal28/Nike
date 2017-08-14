@@ -11,6 +11,7 @@ export default Ember.Route.extend({
   model() {
     console.log('session',this.session,  this.get('session.uid'));
     if (this.get('session.uid')) {
+      this.get('authentication').setAuthenticatedUser(this.get('session.uid'));
       return this.store.findAll('user');
     }
     return [];
