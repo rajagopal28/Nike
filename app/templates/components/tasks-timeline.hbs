@@ -4,4 +4,18 @@
     <li>{{task.title}}</li>
   {{/each}}
 </ul>
+<h2>timeline</h2>
+{{#vertical-timeline as |timeline|}}
+  {{#each tasks as |task|}}
+    {{#timeline.block as |block|}}
+      {{block.image src="imageURL"}}
+
+      {{#block.content as |content|}}
+        <h3>{{task.title}}</h3>
+        {{task.description}}
+        {{#content.date}}Date{{task.dueDate}}{{/content.date}}
+      {{/block.content}}
+    {{/timeline.block}}
+  {{/each}}
+{{/vertical-timeline}}
 {{yield}}
