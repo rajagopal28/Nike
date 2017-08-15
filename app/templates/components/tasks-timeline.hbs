@@ -1,0 +1,7 @@
+<h2>List of Tasks</h2>
+<ul>
+  {{#each tasks as |task|}}
+    <li>{{task.title}}</li>
+  {{/each}}
+</ul>
+{{yield}}

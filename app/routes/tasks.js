@@ -6,12 +6,10 @@ export default Ember.Route.extend(FindQuery, {
   model() {
    if(this.get('session.uid')) {
      let authService = this.get('authentication');
-     return Ember.RSVP.hash({
-       tasks: new Ember.RSVP.Promise((resolve, reject) => {
-         let user = authService.getUser();
-         resolve(user ? user.get('tasks') : {});
-         reject({error: 'cant find something'});
-       })
+     return new Ember.RSVP.Promise((resolve, reject) => {
+       let user = authService.getUser();
+       resolve(user ? user.get('tasks') : {});
+       reject({error: 'cant find something'});
      });
    }
    return [];
