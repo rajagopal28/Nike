@@ -61,7 +61,7 @@
     "ember-route-action-helper": "^2.0.5",
     "ember-source": "~2.14.1",
     "ember-truth-helpers": "^1.2.0",
-    "ember-vertical-timeline": "0.0.9",
+    "ember-vertical-timeline": "0.0.10",
     "emberfire": "^2.0.7",
     "loader.js": "^4.2.3",
     "moment": "^2.18.1",
