@@ -34,10 +34,13 @@
     {{#paper-content padding=true}}
       {{#paper-list}}
         {{#paper-item}}
-          {{#paper-button onClick=(action "transitionTo" "labels")}}First Link{{/paper-button}}
+          {{#paper-button onClick=(action "transitionTo" "labels")}}Labels Link{{/paper-button}}
         {{/paper-item}}
         {{#paper-item}}
-         {{#paper-button onClick=(action "transitionTo" "tasks")}} Second Link{{/paper-button}}
+         {{#paper-button onClick=(action "transitionTo" "tasks")}} Tasks Link{{/paper-button}}
+        {{/paper-item}}
+        {{#paper-item}}
+         {{#paper-button onClick=(action "transitionTo" "users")}} Users Link{{/paper-button}}
         {{/paper-item}}
      {{/paper-list}}
     {{/paper-content}}
