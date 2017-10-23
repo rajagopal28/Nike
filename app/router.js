@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.authenticatedRoute('labels');
   this.route('tasks');
+  this.route('users');
 });
 
 export default Router;
