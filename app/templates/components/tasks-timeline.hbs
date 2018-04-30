@@ -20,7 +20,7 @@
       {{#block.content as |content|}}
         <h3>{{task.title}}</h3>
         {{task.description}}
-        {{#content.date}}Date{{/content.date}}
+        {{#content.date}}{{format-date task.dueDate}}{{/content.date}}
       {{/block.content}}
     {{/timeline.block}}
   {{/each}}
