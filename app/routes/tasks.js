@@ -20,6 +20,23 @@ export default Ember.Route.extend(FindQuery, {
      let taskItem = this.store.createRecord('task', task);
      user.get('tasks').addObject(taskItem);
      taskItem.save().then(() => user.save());
+   },
+   deleteTaskItem(task) {
+    let user = this.get('authentication').getUser();
+     this.store.find('task', task.id).then((found) => {
+       found.destroyRecord().then(() => {
+         var deletions = user.get('tasks').map((t) => {
+           return t.id === task.id ? t.destroyRecord() : false;
+          });
+          Ember.RSVP.all(deletions)
+            .then(function() {
+            return user.save();
+          })
+          .catch(function(e) {
+            // Handle errors
+          });
+       });
+     });
    }
  }
 });

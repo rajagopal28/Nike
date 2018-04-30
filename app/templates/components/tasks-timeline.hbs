@@ -20,6 +20,7 @@
       {{#block.content as |content|}}
         <h3>{{task.title}}</h3>
         {{task.description}}
+        {{#paper-button iconButton=true onClick=(action "deleteTask" task)}}{{paper-icon "delete"}}{{/paper-button}}
         {{#content.date}}{{format-date task.dueDate}}{{/content.date}}
       {{/block.content}}
     {{/timeline.block}}
