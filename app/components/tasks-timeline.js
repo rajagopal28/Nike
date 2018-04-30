@@ -12,6 +12,7 @@ export default Ember.Component.extend({
      let now = new Date().getTime();
      this.sendAction('removeTask', task);
      console.log('Sent action to delete task...');
+     this.set('showDeleteWarning', false);
    },
    deleteTaskWarning(task) {
      this.set('selectedTask', task);
