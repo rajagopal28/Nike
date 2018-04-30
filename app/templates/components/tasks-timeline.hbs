@@ -6,12 +6,17 @@
 </ul>
 <h2>timeline</h2>
 {{#vertical-timeline animate=true as |timeline|}}
-  {{#each tasks as |task|}}
+  {{#each tasks as |task index|}}
     {{#timeline.block as |block|}}
-      {{#block.image class="block-image-bg"}}
-        <img src={{imageURL}}/>
-      {{/block.image}}
-
+      {{#if (if-n-mod index nth=2)}}
+        {{#block.image class='block-image-bg'}}
+          <img src={{imageURLOdd}}/>
+        {{/block.image}}
+      {{else}}
+        {{#block.image class='block-image-bg even'}}
+          <img src={{imageURLEven}}/>
+        {{/block.image}}
+      {{/if}}
       {{#block.content as |content|}}
         <h3>{{task.title}}</h3>
         {{task.description}}
