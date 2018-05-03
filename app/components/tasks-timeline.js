@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   imageURLEven: 'https://codyhouse.co/demo/vertical-timeline/img/cd-icon-movie.svg',
   selectedTask: null,
   showDeleteWarning: false,
+  showEditTaskDialog: false,
   deleteTaskWarningContent: 'Are you sure want to delete this task?',
   actions: {
     deleteTask(task) {
@@ -20,6 +21,19 @@ export default Ember.Component.extend({
    },
    hideDialog() {
      this.set('showDeleteWarning', false);
+     this.set('showEditTaskDialog', false);
+   },
+   editTask(task) {
+    console.log('new Date(task.dueDate)', task.get('dueDate'));
+    task.set('dueDateString', new Date(task.get('dueDate')).toISOString().slice(0, 10));
+    this.set('selectedTask', task);
+    this.set('showEditTaskDialog', true);
+   },
+   updateTaskData(taskContent) {
+     console.log('updating task content', taskContent);
+     console.log('selected task content', this.selectedTask);
+     this.sendAction('updateTask', this.selectedTask, taskContent);
+     this.set('showEditTaskDialog', false);
    }
   }
 });

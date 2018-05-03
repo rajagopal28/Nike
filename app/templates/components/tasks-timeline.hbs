@@ -21,6 +21,7 @@
         <h3>{{task.title}}</h3>
         {{task.description}}
         {{#paper-button iconButton=true onClick=(action "deleteTaskWarning" task)}}{{paper-icon "delete"}}{{/paper-button}}
+        {{#paper-button iconButton=true onClick=(action "editTask" task)}}{{paper-icon "edit"}}{{/paper-button}}
         {{#content.date}}{{format-date task.dueDate}}{{/content.date}}
       {{/block.content}}
     {{/timeline.block}}
@@ -28,5 +29,10 @@
 {{/vertical-timeline}}
 {{#if showDeleteWarning}}
   {{#custom-warning-dialog content=deleteTaskWarningContent onConfirm=(action "deleteTask" selectedTask) onCancel=(action "hideDialog")}} {{/custom-warning-dialog}}
+{{/if}}
+{{#if showEditTaskDialog}}
+  {{#custom-warning-dialog content='UpdateTask' hideOkButton=true onConfirm=(action "updateTaskData" selectedTask) onCancel=(action "hideDialog")}}
+    {{#add-task inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
+  {{/custom-warning-dialog}}
 {{/if}}
 {{yield}}
