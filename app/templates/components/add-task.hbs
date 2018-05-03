@@ -2,6 +2,6 @@
   {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
   {{paper-input class="flex" label="Description Text" type="text" value=task.description onChange=(action (mut task.description))}}
   {{pikaday-input class="flex" minDate=task.minDate value=task.dueDateString placeholder="Due date of task" onSelection=(action (mut task.dueDate))}}
-  {{#paper-button primary=true onClick=(action "addTask")}}Add Label{{/paper-button}}
+  {{#paper-button primary=true onClick=(action "addTask")}}Submit{{/paper-button}}
 </div>
 {{yield}}

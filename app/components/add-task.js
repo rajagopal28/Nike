@@ -1,12 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  task: {
-    title: '',
-    description: '',
-    dueDateString: new Date().toISOString().slice(0, 10),
-    dueDate: new Date(),
-    minDate: new Date()
+  task: null,
+  didInsertElement() {
+    var task = {
+      title: '',
+      description: '',
+      dueDateString: new Date().toISOString().slice(0, 10),
+      dueDate: new Date(),
+      minDate: new Date()
+    };
+    if(this.inputTask) {
+      console.log('inside if...')
+      var dueDate =  new Date(this.get('inputTask.dueDate'));
+      task = {
+        title: this.get('inputTask.title'),
+        description: this.get('inputTask.description'),
+        dueDateString: dueDate.toISOString().slice(0, 10),
+        dueDate: dueDate,
+        minDate: dueDate
+      };
+    }
+    this.set('task', task);
   },
   actions: {
     addTask() {
