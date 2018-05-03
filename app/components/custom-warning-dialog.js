@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   dialogContent: 'This is a dialog rendered into a specific element. Clicking outside the dialog will close it.',
   content: '',
+  hideOkButton: false,
   didInsertElement() {
     let content = this.get('content');
     if(content && content.trim()!=='') {
