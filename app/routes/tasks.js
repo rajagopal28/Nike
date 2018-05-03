@@ -21,6 +21,13 @@ export default Ember.Route.extend(FindQuery, {
      user.get('tasks').addObject(taskItem);
      taskItem.save().then(() => user.save());
    },
+   updateTaskItem(taskRecord, updatedTaskContent) {
+     taskRecord.set('title',updatedTaskContent.title);
+     taskRecord.set('description',updatedTaskContent.description);
+     taskRecord.set('dueDate',updatedTaskContent.dueDate);
+     taskRecord.set('minDate',updatedTaskContent.minDate);
+     taskRecord.save();
+   },
    deleteTaskItem(task) {
     let user = this.get('authentication').getUser();
      this.store.find('task', task.id).then((found) => {
