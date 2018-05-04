@@ -4,9 +4,23 @@
     <li>{{task.title}}</li>
   {{/each}}
 </ul>
+  <div class="layout layout-sm-column">
+    {{#paper-chips
+      readOnly=false
+      removeItem=(action "removeLabel")
+      addItem=(action "addLabel")
+      placeholder="Add a tag"
+      options=labels
+      searchField="name"
+      noMatchesMessage="Not found. Click to add."
+      content=filterLabels as |item|}}
+      <strong>{{item.name}}</strong>
+    {{/paper-chips}}
+    {{#paper-button primary=true onClick=(action "applyFilter")}}Filter{{/paper-button}}
+  </div>
 <h2>timeline</h2>
 {{#vertical-timeline animate=true as |timeline|}}
-  {{#each tasks as |task index|}}
+  {{#each filteredTasks as |task index|}}
     {{#timeline.block as |block|}}
       {{#if (if-n-mod index nth=2)}}
         {{#block.image class='block-image-bg'}}
