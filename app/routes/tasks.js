@@ -5,14 +5,23 @@ export default Ember.Route.extend(FindQuery, {
   authentication: Ember.inject.service(),
   model() {
    if(this.get('session.uid')) {
+     console.log('inside model if...');
      let authService = this.get('authentication');
-     return new Ember.RSVP.Promise((resolve, reject) => {
-       let user = authService.getUser();
-       resolve(user ? user.get('tasks') : {});
-       reject({error: 'cant find something'});
-     });
+     let user = this.get('authentication').getUser();
+     return Ember.RSVP.hash({
+      tasks: user ? user.get('tasks') : [],
+      labels: this.store.findAll('label'),
+    });
    }
-   return [];
+   return Ember.RSVP.hash({
+      tasks: [],
+      labels: [],
+    });
+ },
+ setupController(controller, model) {
+   this._super(...arguments);
+   Ember.set(controller, 'tasks', model.tasks);
+   Ember.set(controller, 'labels', model.labels);
  },
  actions: {
    addTask(task) {

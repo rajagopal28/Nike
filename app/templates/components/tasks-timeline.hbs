@@ -32,7 +32,7 @@
 {{/if}}
 {{#if showEditTaskDialog}}
   {{#custom-warning-dialog content='UpdateTask' hideOkButton=true onConfirm=(action "updateTaskData" selectedTask) onCancel=(action "hideDialog")}}
-    {{#add-task inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
+    {{#add-task labels=labels inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
   {{/custom-warning-dialog}}
 {{/if}}
 {{yield}}
