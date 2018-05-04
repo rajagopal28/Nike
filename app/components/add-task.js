@@ -16,7 +16,8 @@ export default Ember.Component.extend({
       console.log('inside if...')
       var dueDate =  new Date(this.get('inputTask.dueDate'));
       console.log(this.get('inputTask.labels'));
-      let labels = this.get('inputTask.labels').map((la) => {
+      let labels = this.get('inputTask.labels') || [];
+      labels = labels.map((la) => {
         return {name: la};
       });
       console.log('something', labels);
