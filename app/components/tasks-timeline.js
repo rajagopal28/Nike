@@ -8,7 +8,8 @@ export default Ember.Component.extend({
   showEditTaskDialog: false,
   filteredTasks : Ember.A(),
   filterLabels: Ember.A(),
-  deleteTaskWarningContent: 'Are you sure want to delete this task?',
+  disableFiltering: false,
+  deleteTaskWarningContent: 'Are you sure want to delete this task/memo?',
   didInsertElement() {
     this.filterTasksWithLabels();
   },
@@ -81,6 +82,10 @@ export default Ember.Component.extend({
    },
    applyFilter() {
      this.filterTasksWithLabels();
+   },
+   viewTask(task) {
+     console.log('task_id', task.get('id'));
+     this.sendAction('viewTask', task);
    }
   }
 });

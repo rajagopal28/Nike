@@ -54,6 +54,9 @@ export default Ember.Route.extend(FindQuery, {
           });
        });
      });
+   },
+   viewTaskItem(task) {
+     this.transitionTo('task', task.get('id'));
    }
  }
 });
