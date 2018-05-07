@@ -31,7 +31,6 @@
     "test": "tests"
   },
   "devDependencies": {
-    "gulp-sass": "^3.1.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-cli": "~2.14.2",
@@ -61,9 +60,11 @@
     "ember-resolver": "^4.0.0",
     "ember-route-action-helper": "^2.0.5",
     "ember-source": "~2.14.1",
+    "ember-transition-helper": "^1.0.0",
     "ember-truth-helpers": "^1.2.0",
     "ember-vertical-timeline": "0.0.10",
     "emberfire": "^2.0.7",
+    "gulp-sass": "^3.1.0",
     "loader.js": "^4.2.3",
     "moment": "^2.18.1",
     "torii": "^0.9.6"
