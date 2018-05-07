@@ -2,19 +2,21 @@
   {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
   {{#paper-button primary=true onClick=(action "addTask")}}Submit{{/paper-button}}
 </div>
-<div class="layout">
-  {{#paper-chips
-    readOnly=false
-    removeItem=(action "removeLabel")
-    addItem=(action "addLabel")
-    placeholder="Add a tag"
-    options=labels
-    searchField="name"
-    noMatchesMessage="Not found. Click to add."
-    content=task.labels as |item|}}
-    <strong>{{item.name}}</strong>
-  {{/paper-chips}}
-</div>
+{{#unless disableFiltering}}
+  <div class="layout">
+    {{#paper-chips
+      readOnly=false
+      removeItem=(action "removeLabel")
+      addItem=(action "addLabel")
+      placeholder="Add a tag"
+      options=labels
+      searchField="name"
+      noMatchesMessage="Not found. Click to add."
+      content=task.labels as |item|}}
+      <strong>{{item.name}}</strong>
+    {{/paper-chips}}
+  </div>
+{{/unless}}
 <div class="layout layout-sm-column">
   {{paper-input class="flex" label="Description Text" type="text" value=task.description onChange=(action (mut task.description))}}
   {{pikaday-input class="flex" minDate=task.minDate value=task.dueDateString placeholder="Due date of task" onSelection=(action (mut task.dueDate))}}

@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   task: null,
   labels:[],
+  disableFiltering: false,
   didInsertElement() {
     var task = {
       title: '',
