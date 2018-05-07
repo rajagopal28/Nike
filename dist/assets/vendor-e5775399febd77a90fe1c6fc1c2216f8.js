@@ -7917,7 +7917,13 @@ if(""!==a){for(var s=a.split(" "),u=0,l=0;l<s.length-1;l++){var c=this.ctx.measu
 u+=c,u>t&&(i++,u=c)}var d=this.ctx.measureText(s[l]).width
 u+=d,u>t&&(i++,u=d)}}return i},fitTextSize:function(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null,r=this.width(e,n),i=this.ctx.font.match(/\d+/)[0]
 return Math.floor(parseFloat(i)*t/r)}})})
-define("ember-truth-helpers/helpers/and",["exports","ember-truth-helpers/utils/truth-convert"],function(e,t){function n(e){for(var n=0,r=e.length;n<r;n++)if(!1===(0,t.default)(e[n]))return e[n]
+define("ember-transition-helper/helpers/transition-to",["exports","ember-transition-helper/utils/transform-query-params"],function(e,t){"use strict"
+function n(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t]
+return n}return Array.from(e)}function r(e){return Array.isArray(e)?e:Array.from(e)}Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Helper.extend({router:Ember.computed(function(){return Ember.getOwner(this).lookup("router:main")}).readOnly(),compute:function(e){var i=r(e),o=i[0],a=i.slice(1),s=this.get("router")
+return function(){for(var e=arguments.length,r=Array(e),i=0;i<e;i++)r[i]=arguments[i]
+var u=a.concat(r),l=a.length?[o].concat(n(a)):[o]
+return s.transitionTo.apply(s,n((0,t.default)(l))),u}}})}),define("ember-transition-helper/utils/transform-query-params",["exports"],function(e){"use strict"
+function t(e){return e&&"function"==typeof e.map?e.map(function(e){return e&&e.isQueryParams?{queryParams:e.values}:e}):e}Object.defineProperty(e,"__esModule",{value:!0}),e.default=t}),define("ember-truth-helpers/helpers/and",["exports","ember-truth-helpers/utils/truth-convert"],function(e,t){function n(e){for(var n=0,r=e.length;n<r;n++)if(!1===(0,t.default)(e[n]))return e[n]
 return e[e.length-1]}e.andHelper=n}),define("ember-truth-helpers/helpers/equal",["exports"],function(e){function t(e){return e[0]===e[1]}e.equalHelper=t}),define("ember-truth-helpers/helpers/gt",["exports"],function(e){function t(e,t){var n=e[0],r=e[1]
 return t.forceNumber&&("number"!=typeof n&&(n=Number(n)),"number"!=typeof r&&(r=Number(r))),n>r}e.gtHelper=t}),define("ember-truth-helpers/helpers/gte",["exports"],function(e){function t(e,t){var n=e[0],r=e[1]
 return t.forceNumber&&("number"!=typeof n&&(n=Number(n)),"number"!=typeof r&&(r=Number(r))),n>=r}e.gteHelper=t}),define("ember-truth-helpers/helpers/is-array",["exports","ember"],function(e,t){function n(e){for(var n=0,r=e.length;n<r;n++)if(!1===t.default.isArray(e[n]))return!1
@@ -8059,7 +8065,8 @@ if(l){if(i.isRelationshipEmbedded(r,e.modelName,u)){var c=r.modelFor(u.type)
 for(var d in l){var h=l[d]
 h.id=d,i._updateRecordCacheForType(c,h,r)}}else{var p=Object.keys(l)
 a[o]=t.default.A(p)}}else a[o]=t.default.A()}})}},_getRecordCache:function(e,t){var n=e.modelName,r=this._recordCacheForType
-return r[n]=r[n]||{},r[n][t]=r[n][t]||{},r[n][t]},_getKey:function(e){return"function"==typeof e.key?e.key():"string"==typeof e.key?e.key:e.name()},shouldBackgroundReloadRecord:function(){return!1}})}),define("emberfire/initializers/emberfire",["exports","ember","ember-data","firebase","emberfire/adapters/firebase","emberfire/serializers/firebase"],function(e,t,n,r,i,o){t.default.libraries&&(r.default.SDK_VERSION&&t.default.libraries.registerCoreLibrary("Firebase",r.default.SDK_VERSION),t.default.libraries.registerCoreLibrary("EmberFire","0.0.0")),e.default={name:"emberfire",before:"ember-data",initialize:function(){var e=arguments[1]||arguments[0]
+return r[n]=r[n]||{},r[n][t]=r[n][t]||{},r[n][t]},_getKey:function(e){return"function"==typeof e.key?e.key():"string"==typeof e.key?e.key:e.name()},shouldBackgroundReloadRecord:function(){return!1}})})
+define("emberfire/initializers/emberfire",["exports","ember","ember-data","firebase","emberfire/adapters/firebase","emberfire/serializers/firebase"],function(e,t,n,r,i,o){t.default.libraries&&(r.default.SDK_VERSION&&t.default.libraries.registerCoreLibrary("Firebase",r.default.SDK_VERSION),t.default.libraries.registerCoreLibrary("EmberFire","0.0.0")),e.default={name:"emberfire",before:"ember-data",initialize:function(){var e=arguments[1]||arguments[0]
 e.register("adapter:-firebase",i.default),e.register("serializer:-firebase",o.default)
 var a={instantiate:!1,singleton:!1}
 e.register("firebase-auth-provider:twitter",r.default.auth.TwitterAuthProvider,a),e.register("firebase-auth-provider:facebook",r.default.auth.FacebookAuthProvider,a),e.register("firebase-auth-provider:github",r.default.auth.GithubAuthProvider,a),e.register("firebase-auth-provider:google",r.default.auth.GoogleAuthProvider,a),n.default.Store.prototype._emberfirePatched||n.default.Store.reopen({_emberfirePatched:!0,_emberfireHandleRecordPush:function(e){var t=this
@@ -8070,8 +8077,7 @@ return Array.isArray(t)?e=t.map(function(e){return e.getRecord()}):t&&(e=[t.getR
 t.recordWillUnload&&t.recordWillUnload(this,e)},recordWillDelete:function(e){var t=this.adapterFor(e.constructor.modelName)
 t.recordWillDelete&&t.recordWillDelete(this,e)}}),n.default.Model.prototype._emberfirePatched||n.default.Model.reopen({_emberfirePatched:!0,unloadRecord:function(){return this.store.recordWillUnload(this),this._super()},deleteRecord:function(){this.store.recordWillDelete(this),this._super()},ref:function(){var e=this.store.adapterFor(this.constructor.modelName)
 if(e._getAbsoluteRef)return e._getAbsoluteRef(this)}}),n.default.AdapterPopulatedRecordArray.prototype._emberfirePatched||n.default.AdapterPopulatedRecordArray.reopen({_emberfirePatched:!0,willDestroy:function(){return this.__firebaseCleanup&&this.__firebaseCleanup(),this._super()}}),n.default.FirebaseAdapter=i.default,n.default.FirebaseSerializer=o.default}}}),define("emberfire/mixins/waitable",["exports","ember"],function(e,t){e.default=t.default.Mixin.create({init:function(){this._super.apply(this,arguments),this._reasons=0,t.default.testing&&this._registerWaiter()},_incrementWaiters:function(){this._reasons++},_decrementWaiters:function(){this._reasons--},_shouldWait:function(){return 0===this._reasons},_registerWaiter:function(){var e=this
-this._waiter=function(){return e._shouldWait()},t.default.Test.registerWaiter(this._waiter)}})})
-define("emberfire/serializers/firebase",["exports","ember","ember-data","firebase"],function(e,t,n,r){var i=t.default.assign
+this._waiter=function(){return e._shouldWait()},t.default.Test.registerWaiter(this._waiter)}})}),define("emberfire/serializers/firebase",["exports","ember","ember-data","firebase"],function(e,t,n,r){var i=t.default.assign
 e.default=n.default.JSONSerializer.extend(n.default.EmbeddedRecordsMixin,{isNewSerializerAPI:!0,serializeAttribute:function(e,t,n,i){var o=e.attr(n)
 if(this._super(e,t,n,i),this._canSerialize(n)&&o===r.default.database.ServerValue.TIMESTAMP){var a=this._getMappedKey(n,e.type)
 a===n&&this.keyForAttribute&&(a=this.keyForAttribute(n,"serialize")),t[a]=o}},extractAttributes:function(e,t){var n=this._super(e,t)
@@ -8904,10 +8910,10 @@ return r(e)?null:(t=Number(e),n(t)?t:null)},serialize:function(e){var t=void 0
 return r(e)?null:(t=Number(e),n(t)?t:null)}})}),define("ember-data/transforms/string",["exports","ember-data/transforms/transform"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
 var n=Ember.isNone
-e.default=t.default.extend({deserialize:function(e){return n(e)?null:String(e)},serialize:function(e){return n(e)?null:String(e)}})}),define("ember-data/transforms/transform",["exports"],function(e){"use strict"
+e.default=t.default.extend({deserialize:function(e){return n(e)?null:String(e)},serialize:function(e){return n(e)?null:String(e)}})})
+define("ember-data/transforms/transform",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Object.extend({serialize:null,deserialize:null})}),define("ember-data/version",["exports"],function(e){"use strict"
-Object.defineProperty(e,"__esModule",{value:!0}),e.default="2.14.11"})
-define("moment/index",["exports","moment/lib"],function(e,t){"use strict"
+Object.defineProperty(e,"__esModule",{value:!0}),e.default="2.14.11"}),define("moment/index",["exports","moment/lib"],function(e,t){"use strict"
 function n(e,n){if(t.default.isMoment(e)&&t.default.isMoment(n))return e.isBefore(n)?-1:e.isSame(n)?0:1
 throw new Error("Arguments provided to `compare` are not moment objects")}Object.defineProperty(e,"__esModule",{value:!0}),t.default.prototype.compare=n,t.default.compare=n,t.default.prototype.clone=function(){return(0,t.default)(this)},e.default=t.default}),define("moment/lib",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=self.moment}),define("torii/adapters/application",["exports"],function(e){"use strict"
@@ -9016,7 +9022,8 @@ var t=this.get("scope"),n=e.authType,a=this.get("returnScopes")
 return r(this.settings()).then(function(){return i(t,a,n)}).then(o)},settings:function(){return{status:!0,cookie:!0,xfbml:this.get("xfbml"),version:this.get("version"),appId:this.get("appId"),channelUrl:this.get("channelUrl"),locale:this.get("locale")}},loadFbLogin:s("init",function(){r(this.settings())})})
 e.default=u}),define("torii/providers/facebook-oauth2",["exports","torii/configuration","torii/providers/oauth2-code"],function(e,t,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=n.default.extend({name:"facebook-oauth2",baseUrl:"https://www.facebook.com/dialog/oauth",requiredUrlParams:["display"],responseParams:["code","state"],scope:(0,t.configurable)("scope","email"),display:"popup",redirectUri:(0,t.configurable)("redirectUri",function(){return this._super()}),open:function(){return this._super().then(function(e){if(e.authorizationCode&&"200"===e.authorizationCode)throw new Error("User canceled authorization")
-return e})}})}),define("torii/providers/github-oauth2",["exports","torii/providers/oauth2-code","torii/configuration"],function(e,t,n){"use strict"
+return e})}})})
+define("torii/providers/github-oauth2",["exports","torii/providers/oauth2-code","torii/configuration"],function(e,t,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
 var r=t.default.extend({name:"github-oauth2",baseUrl:"https://github.com/login/oauth/authorize",responseParams:["code","state"],redirectUri:(0,n.configurable)("redirectUri",function(){return this._super()})})
 e.default=r}),define("torii/providers/google-oauth2-bearer-v2",["exports","torii/providers/oauth2-code","torii/configuration"],function(e,t,n){"use strict"
@@ -9025,8 +9032,7 @@ var r=t.default.extend({name:"google-oauth2-bearer-v2",baseUrl:"https://accounts
 return this.get("popup").open(n,i,e).then(function(e){var n=[]
 if(i.forEach(function(t){void 0===e[t]&&n.push(t)}),n.length)throw new Error("The response from the provider is missing these required response params: "+n.join(", "))
 return new Ember.RSVP.Promise(function(n,i){Ember.$.ajax({type:"GET",url:o,data:{access_token:e.access_token},success:function(o){o.audience===a?n(Object.assign(e,{provider:t,redirectUri:r})):i(void 0===o.audience?new Error("Unexpected response from token validation server. The 'audience' field may be missing."):new Error("Access token is invalid or has been tempered with. You may be subject to a 'confused deputy' attack."))},error:function(e,t){i(new Error("Token validation request failed with status '"+t+"' (server '"+o+"' '"+e.responseText+"')."))}})}).then(function(e){return e})})},fetch:function(e){return e}})
-e.default=r})
-define("torii/providers/google-oauth2-bearer",["exports","torii/providers/oauth2-bearer","torii/configuration"],function(e,t,n){"use strict"
+e.default=r}),define("torii/providers/google-oauth2-bearer",["exports","torii/providers/oauth2-bearer","torii/configuration"],function(e,t,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
 var r=t.default.extend({name:"google-oauth2-bearer",baseUrl:"https://accounts.google.com/o/oauth2/auth",optionalUrlParams:["scope","request_visible_actions","hd"],requestVisibleActions:(0,n.configurable)("requestVisibleActions",""),responseParams:["access_token"],scope:(0,n.configurable)("scope","email"),redirectUri:(0,n.configurable)("redirectUri","http://localhost:4200/oauth2callback"),hd:(0,n.configurable)("hd","")})
 e.default=r}),define("torii/providers/google-oauth2",["exports","torii/providers/oauth2-code","torii/configuration"],function(e,t,n){"use strict"
