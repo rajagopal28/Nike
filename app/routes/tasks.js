@@ -51,6 +51,7 @@ export default Ember.Route.extend(FindQuery, {
           })
           .catch(function(e) {
             // Handle errors
+            console.log('ERROR in delete Task CALL:', e);
           });
        });
      });

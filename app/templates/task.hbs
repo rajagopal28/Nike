@@ -1,2 +1,5 @@
-{{#task-detail task=model}}{{/task-detail}}
+{{#task-detail task=model}}
+  {{#add-memo task=model addNewMemo=(route-action "addMemoItem")}} {{/add-memo}}
+{{/task-detail}}
+{{#tasks-timeline tasks=model.logs updateTask=(route-action "updateMemoItem") removeTask=(route-action "deleteMemoItem") viewTask=(route-action "viewMemoItem")}}{{/tasks-timeline}}
 {{outlet}}
