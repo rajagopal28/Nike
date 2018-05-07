@@ -10,6 +10,7 @@ Router.map(function() {
   this.authenticatedRoute('labels');
   this.route('tasks');
   this.route('users');
+  this.route('task', { path: '/task/:task_id' });
 });
 
 export default Router;
