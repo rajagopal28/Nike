@@ -17,7 +17,7 @@ export default Ember.Component.extend({
       memo = {
         title: this.get('inputMemo.title'),
         description: this.get('inputMemo.description'),
-        dateCreatedString: dueDate.toISOString().slice(0, 10),
+        dateCreatedString: dateCreated.toISOString().slice(0, 10),
         labels: labels,
         dateCreated: dateCreated,
         minDate: new Date()
@@ -32,9 +32,10 @@ export default Ember.Component.extend({
      this.sendAction('addNewMemo', this.get('task'), {
        title: this.memo.title,
        description: this.memo.description,
-       dueDate, dateCreated,
+       dueDate: dateCreated,
        dateCreated: dateCreated,
-       dateModifited: dateCreated
+       dateModifited: dateCreated,
+       taskId: this.get('task.id')
      });
      this.set('memo.title', '');
      this.set('memo.description', '');

@@ -34,6 +34,7 @@ export default Ember.Route.extend(FindQuery, {
      taskRecord.set('title',updatedTaskContent.title);
      taskRecord.set('description',updatedTaskContent.description);
      taskRecord.set('dueDate',updatedTaskContent.dueDate);
+     taskRecord.set('dateModified',new Date().getTime());
      taskRecord.set('minDate',updatedTaskContent.minDate);
      taskRecord.set('labels',updatedTaskContent.labels);
      taskRecord.save();

@@ -32,7 +32,6 @@ export default Ember.Component.extend({
   actions: {
     deleteTask(task) {
      console.log('in component delete task', this.task);
-     let now = new Date().getTime();
      this.sendAction('removeTask', task);
      console.log('Sent action to delete task...');
      this.set('showDeleteWarning', false);

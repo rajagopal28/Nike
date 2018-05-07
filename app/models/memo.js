@@ -6,5 +6,6 @@ export default DS.Model.extend({
   dueDate: DS.attr('number'),
   dateCreated: DS.attr('number'),
   dateModified: DS.attr('number'),
+  taskId: DS.attr('string'),
   task: DS.belongsTo('task', { async: true, inverse: null })
 });

@@ -11,10 +11,6 @@ export default Ember.Route.extend({
   },
   actions: {
     addMemoItem(task, memo) {
-    //   let user = this.get('authentication').getUser();
-    //   let taskItem = this.store.createRecord('task', task);
-    //   user.get('tasks').addObject(taskItem);
-    //   taskItem.save().then(() => user.save());
       let memoRecord = this.store.createRecord('memo', memo);
       this.store.findRecord('task', task.id).then((item) => {
         memoRecord.save().then(()=> {
@@ -25,24 +21,28 @@ export default Ember.Route.extend({
       console.log('adding memo..', memo);
     },
     updateMemoItem(memoRecord, updatedMemoContent) {
+        memoRecord.set('title',updatedMemoContent.title);
+        memoRecord.set('description',updatedMemoContent.description);
+        memoRecord.set('dueDate',updatedMemoContent.dueDate);
+        memoRecord.set('dateCreated',updatedMemoContent.dueDate);
+        memoRecord.set('dateModified',new Date().getTime());
+        memoRecord.set('minDate',updatedMemoContent.minDate);
+        memoRecord.save();
     },
     deleteMemoItem(memo) {
-    //  let user = this.get('authentication').getUser();
-    //   this.store.find('task', task.id).then((found) => {
-    //     found.destroyRecord().then(() => {
-    //       var deletions = user.get('tasks').map((t) => {
-    //         return t.id === task.id ? t.destroyRecord() : false;
-    //        });
-    //        Ember.RSVP.all(deletions)
-    //          .then(function() {
-    //          return user.save();
-    //        })
-    //        .catch(function(e) {
-    //          // Handle errors
-    //          console.log('ERROR in delete Task CALL:', e);
-    //        });
-    //     });
-    //   });
+      this.store.find('memo', memo.id).then((foundMemo) => {
+        let taskId = memo.get('taskId');
+        foundMemo.destroyRecord().then((rec) => {
+          this.store.find('task', taskId).then((foundTask) => {
+            let deletions = foundTask.get('logs').map((l) => {
+              return l.id === memo.id ? l.destroyRecord() : false;
+             });
+             Ember.RSVP.all(deletions)
+               .then(() => foundTask.save())
+               .catch((e) => console.log('ERROR in delete Task CALL:', e));
+          });
+        });
+      });
     },
     viewMemoItem(memo) {
       // this.transitionTo('task', task.get('id'));
