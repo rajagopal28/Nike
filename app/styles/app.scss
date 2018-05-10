@@ -3,9 +3,18 @@
 body {
   background-color: #f0f4f8;
 }
-.block-image-bg.even {
+.timeline-image.done {
   background-color: #74ce65;
 }
-.block-image-bg {
+.timeline-image.re-new {
+  background-color: #f48024;
+}
+.timeline-image.taken {
+  background-color: #eac35e;
+}
+.timeline-image.new {
+  background-color: #61b0e0;
+}
+.timeline-image {
   background-color: #c03b44;
 }
