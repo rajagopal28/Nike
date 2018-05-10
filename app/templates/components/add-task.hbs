@@ -2,8 +2,8 @@
   {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
   {{#paper-button primary=true onClick=(action "addTask")}}Submit{{/paper-button}}
 </div>
-{{#unless disableFiltering}}
-  <div class="layout">
+{{#unless memoMode}}
+  <div class="layout layout-sm-column">
     {{#paper-chips
       readOnly=false
       removeItem=(action "removeLabel")
@@ -15,6 +15,15 @@
       content=task.labels as |item|}}
       <strong>{{item.name}}</strong>
     {{/paper-chips}}
+    {{#paper-select
+      disabled=false
+      label="Status"
+      options=statusList
+      selected=task.status
+      onChange=(action (mut task.status))
+      as |status|}}
+      {{status}}
+    {{/paper-select}}
   </div>
 {{/unless}}
 <div class="layout layout-sm-column">

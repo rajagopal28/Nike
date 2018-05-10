@@ -18,15 +18,13 @@
 {{#vertical-timeline animate=true as |timeline|}}
   {{#each filteredTasks as |task index|}}
     {{#timeline.block as |block|}}
-      {{#if (if-n-mod index nth=2)}}
-        {{#block.image class='block-image-bg'}}
-          <img src={{imageURLOdd}}/>
-        {{/block.image}}
-      {{else}}
-        {{#block.image class='block-image-bg even'}}
-          <img src={{imageURLEven}}/>
-        {{/block.image}}
-      {{/if}}
+      {{#block.image class=task.status}}
+        {{#if (if-n-mod index nth=2)}}
+            <img src={{imageURLOdd}}/>
+        {{else}}
+            <img src={{imageURLEven}}/>
+        {{/if}}
+      {{/block.image}}
       {{#block.content as |content|}}
         <h3>{{task.title}}</h3>
         {{task.description}}
@@ -45,7 +43,7 @@
 {{/if}}
 {{#if showEditTaskDialog}}
   {{#custom-warning-dialog content='UpdateData' hideOkButton=true onConfirm=(action "updateTaskData" selectedTask) onCancel=(action "hideDialog")}}
-    {{#add-task labels=labels disableFiltering=disableFiltering inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
+    {{#add-task labels=labels memoMode=disableFiltering inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
   {{/custom-warning-dialog}}
 {{/if}}
 {{yield}}

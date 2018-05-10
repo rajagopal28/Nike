@@ -3,13 +3,15 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   task: null,
   labels:[],
-  disableFiltering: false,
+  memoMode: false,
+  statusList: ['new', 'taken', 'done', 're-new'],
   didInsertElement() {
     var task = {
       title: '',
       description: '',
       dueDateString: new Date().toISOString().slice(0, 10),
       labels: Ember.A(),// array
+      status: this.statusList[0], // new
       dueDate: new Date(),
       minDate: new Date()
     };
@@ -22,11 +24,13 @@ export default Ember.Component.extend({
         return {name: la};
       });
       console.log('something', labels);
+      console.log('status', this.get('inputTask.status'));
       task = {
         title: this.get('inputTask.title'),
         description: this.get('inputTask.description'),
         dueDateString: dueDate.toISOString().slice(0, 10),
         labels: labels,
+        status: this.get('inputTask.status'),
         dueDate: dueDate,
         minDate: dueDate
       };
@@ -46,12 +50,14 @@ export default Ember.Component.extend({
        labels: labels,
        dateCreated: now,
        logs:{},
+       status : this.task.status,
        dateModifited: now
      });
      this.set('task.title', '');
      this.set('task.description', '');
      this.set('task.labels', Ember.A());
      this.set('task.dueDate', new Date());
+     this.set('task.status', this.statusList[0]);
      this.set('task.dueDateString', new Date().toISOString().slice(0, 10));
    },
    addLabel(label) {

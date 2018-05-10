@@ -7,6 +7,7 @@ export default DS.Model.extend({
   dateModified: DS.attr('number'),
   dueDate: DS.attr('number'),
   labels: DS.attr(),
+  status: DS.attr('string'),
   user: DS.belongsTo('user', { async: true, inverse: null }),
   logs: DS.hasMany('memo', { async: true, inverse: null })
 });
