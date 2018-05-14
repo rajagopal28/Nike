@@ -1,17 +1,23 @@
 import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
 export default Ember.Component.extend({
   task: null,
   labels:[],
   memoMode: false,
-  statusList: ['new', 'taken', 'done', 're-new'],
+  statusList: Ember.A(),
+  taskService: service('task-service'),
+  init() {
+    this._super(...arguments);
+    this.set('statusList', this.get('taskService').getStatuses());
+  },
   didInsertElement() {
     var task = {
       title: '',
       description: '',
       dueDateString: new Date().toISOString().slice(0, 10),
       labels: Ember.A(),// array
-      status: this.statusList[0], // new
+      status: this.get('taskService').getInitialStatus(), // new
       dueDate: new Date(),
       minDate: new Date()
     };
