@@ -10,8 +10,6 @@
       {{/each}}
     </ul>
   {{/if}}
-  {{#unless session.isAuthenticated}}
-    {{#login-component loginAction=(route-action "signIn") session=session logoutAction=(route-action "signOut") }}{{/login-component}}
-  {{/unless}}
+  {{#login-component session=session loginAction=(route-action "signIn") session=session logoutAction=(route-action "signOut") }}{{/login-component}}
 </div>
 {{/navigation-component}}
