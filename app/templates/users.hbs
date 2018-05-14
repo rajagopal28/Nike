@@ -1,2 +1,14 @@
-{{#tasks-timeline tasks=model}}{{/tasks-timeline}}
+{{#each model as |user|}}
+  {{#paper-card as |card|}}
+    {{#card.title as |title|}}
+      {{#title.text as |text|}}
+        {{#text.headline}}{{user.displayName}}{{/text.headline}}
+      {{/title.text}}
+    {{/card.title}}
+    {{#card.content}}
+      <strong>Joined:</strong> {{format-date user.joined}}
+      <br/><strong>UUID:</strong>{{user.uid}}
+    {{/card.content}}
+  {{/paper-card}}
+{{/each}}
 {{outlet}}
