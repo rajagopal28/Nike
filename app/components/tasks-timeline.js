@@ -1,8 +1,10 @@
 import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
 export default Ember.Component.extend({
   imageURLOdd : 'https://codyhouse.co/demo/vertical-timeline/img/cd-icon-picture.svg',
   imageURLEven: 'https://codyhouse.co/demo/vertical-timeline/img/cd-icon-movie.svg',
+  taskService: service('task-service'),
   selectedTask: null,
   showDeleteWarning: false,
   showEditTaskDialog: false,
@@ -10,7 +12,9 @@ export default Ember.Component.extend({
   filterLabels: Ember.A(),
   disableFiltering: false,
   deleteTaskWarningContent: 'Are you sure want to delete this task/memo?',
+  completeTaskWarningContent: 'Are you sure want to Complete this task?',
   didInsertElement() {
+    this.set('finalTaskStatusValue', this.get('taskService').getFinalStatus());
     this.filterTasksWithLabels();
   },
   filterTasksWithLabels(){
@@ -43,6 +47,7 @@ export default Ember.Component.extend({
    hideDialog() {
      this.set('showDeleteWarning', false);
      this.set('showEditTaskDialog', false);
+     this.set('showCompleteTaskDialog', false);
    },
    editTask(task) {
     console.log('new Date(task.dueDate)', task.get('dueDate'));
@@ -85,6 +90,15 @@ export default Ember.Component.extend({
    viewTask(task) {
      console.log('task_id', task.get('id'));
      this.sendAction('viewTask', task);
+   },
+   completeTaskWarning(task) {
+     this.set('showCompleteTaskDialog', true);
+     this.set('selectedTask', task);
+   },
+   completeTask() {
+     this.set('selectedTask.status', this.get('taskService').getFinalStatus());
+     this.sendAction('updateTask', this.selectedTask);
+     this.set('showCompleteTaskDialog', false);
    }
   }
 });

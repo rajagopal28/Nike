@@ -32,6 +32,9 @@
         {{#paper-button iconButton=true onClick=(action "editTask" task)}}{{paper-icon "edit"}}{{/paper-button}}
         {{#unless disableFiltering}}
           {{#paper-button iconButton=true onClick=(action "viewTask" task)}}{{paper-icon "visibility"}}{{/paper-button}}
+          {{#if (not-eq task.status finalTaskStatusValue)}}
+            {{#paper-button iconButton=true onClick=(action "completeTaskWarning" task)}}{{paper-icon "done"}}{{/paper-button}}
+          {{/if}}
         {{/unless}}
         {{#content.date}}{{format-date task.dueDate}}{{/content.date}}
       {{/block.content}}
@@ -45,5 +48,8 @@
   {{#custom-warning-dialog content='UpdateData' hideOkButton=true onConfirm=(action "updateTaskData" selectedTask) onCancel=(action "hideDialog")}}
     {{#add-task labels=labels memoMode=disableFiltering inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
   {{/custom-warning-dialog}}
+{{/if}}
+{{#if showCompleteTaskDialog}}
+  {{#custom-warning-dialog content=completeTaskWarningContent onConfirm=(action "completeTask") onCancel=(action "hideDialog")}} {{/custom-warning-dialog}}
 {{/if}}
 {{yield}}

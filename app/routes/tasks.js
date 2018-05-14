@@ -31,13 +31,15 @@ export default Ember.Route.extend(FindQuery, {
      taskItem.save().then(() => user.save());
    },
    updateTaskItem(taskRecord, updatedTaskContent) {
-     taskRecord.set('title',updatedTaskContent.title);
-     taskRecord.set('description',updatedTaskContent.description);
-     taskRecord.set('dueDate',updatedTaskContent.dueDate);
-     taskRecord.set('dateModified',new Date().getTime());
-     taskRecord.set('status',updatedTaskContent.status);
-     taskRecord.set('minDate',updatedTaskContent.minDate);
-     taskRecord.set('labels',updatedTaskContent.labels);
+     if(updatedTaskContent) {
+         taskRecord.set('title',updatedTaskContent.title);
+         taskRecord.set('description',updatedTaskContent.description);
+         taskRecord.set('dueDate',updatedTaskContent.dueDate);
+         taskRecord.set('dateModified',new Date().getTime());
+         taskRecord.set('status',updatedTaskContent.status);
+         taskRecord.set('minDate',updatedTaskContent.minDate);
+         taskRecord.set('labels',updatedTaskContent.labels);
+     }
      taskRecord.save();
    },
    deleteTaskItem(task) {
