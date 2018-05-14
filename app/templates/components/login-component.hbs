@@ -1,5 +1,5 @@
 {{#if session.isAuthenticated}}
-  Logged in as {{session.currentUser.displayName}}
+  <span>Logged in as {{session.currentUser.displayName}}</span>
   {{#paper-button primary=true onClick=(action "logout")}}Sign out{{/paper-button}}
   {{outlet}}
 {{else}}
