@@ -13,17 +13,27 @@ export default Ember.Component.extend({
   disableFiltering: false,
   deleteTaskWarningContent: 'Are you sure want to delete this task/memo?',
   completeTaskWarningContent: 'Are you sure want to Complete this task?',
+  filterStatus: '',
+  init() {
+      this._super(...arguments);
+      let taskService = this.get('taskService');
+      this.set('finalTaskStatusValue', taskService.getFinalStatus());
+      this.set('statusList', taskService.getStatuses());
+  },
   didInsertElement() {
-    this.set('finalTaskStatusValue', this.get('taskService').getFinalStatus());
     this.filterTasksWithLabels();
   },
   filterTasksWithLabels(){
-    let filteredTasks = this.tasks;
+    let filteredTasks = this.get('tasks');
     let _self = this;
     console.log('this.filterLabels', this.get('filterLabels').toArray());
     if(this.filterLabels.length > 0) {
       let mappedFilter = _self.get('filterLabels').map((a) => a.name);
-      filteredTasks = this.get('tasks').filter((ta) =>  _self.arrayContainsArray(ta.get('labels') || [], mappedFilter));
+      filteredTasks = filteredTasks.filter((ta) =>  _self.arrayContainsArray(ta.get('labels') || [], mappedFilter));
+    }
+    if(_self.filterStatus !== '') {
+      console.log('status not empty', _self.filterStatus);
+      filteredTasks = filteredTasks.filter((ta) =>  _self.filterStatus === ta.get('status'));
     }
     this.set('filteredTasks', filteredTasks);
   },

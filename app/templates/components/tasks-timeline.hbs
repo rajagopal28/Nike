@@ -11,6 +11,15 @@
       content=filterLabels as |item|}}
       <strong>{{item.name}}</strong>
     {{/paper-chips}}
+    {{#paper-select
+      disabled=false
+      label="Status"
+      options=statusList
+      selected=filterStatus
+      onChange=(action (mut filterStatus))
+      as |status|}}
+      {{status}}
+    {{/paper-select}}
     {{#paper-button primary=true onClick=(action "applyFilter")}}Filter{{/paper-button}}
   </div>
 {{/unless}}
