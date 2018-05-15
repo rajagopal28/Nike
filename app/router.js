@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('tasks');
   this.route('users');
   this.route('task', { path: '/task/:task_id' });
+  this.route('dashboard');
 });
 
 export default Router;

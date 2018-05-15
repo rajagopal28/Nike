@@ -20,10 +20,12 @@ export default Ember.Route.extend({
    signIn(provider) {
      console.log('sigining in', provider);
      let authService = this.get('authentication');
+     let _self = this;
      this.get('session').open('firebase', { provider: provider}).then((data) => {
        console.log('user load');
        console.log(data.currentUser);
        authService.setAuthenticatedUser(data.currentUser.uid);
+       _self.transitionTo('dashboard');
      });
    },
    signOut() {
