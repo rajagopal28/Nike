@@ -52,6 +52,7 @@
     "ember-data": "~2.14.9",
     "ember-emberfire-find-query": "^1.0.2",
     "ember-export-application-global": "^2.0.0",
+    "ember-google-charts": "^1.5.3",
     "ember-in-viewport": "^2.1.1",
     "ember-load-initializers": "^1.0.0",
     "ember-new-computed": "^1.0.3",
