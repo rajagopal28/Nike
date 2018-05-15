@@ -97,6 +97,11 @@ export default Ember.Component.extend({
    applyFilter() {
      this.filterTasksWithLabels();
    },
+   resetFilter() {
+     this.set('filterLabels', []);
+     this.set('filterStatus', '');
+     this.filterTasksWithLabels();
+   },
    viewTask(task) {
      console.log('task_id', task.get('id'));
      this.sendAction('viewTask', task);
