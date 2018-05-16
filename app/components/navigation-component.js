@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   router: Ember.inject.service('-routing'),
   leftSideBarLockedOpen: false,
   leftSideBarOpen: false,
+  showUserProfileDialog: false,
   actions : {
     toggle(property) {
       this.toggleProperty(property);
@@ -16,6 +17,9 @@ export default Ember.Component.extend({
       //'action (mut leftSideBarOpen)'
       this.toggleProperty('leftSideBarLockedOpen');
       this.get('router').transitionTo(route);
+    },
+    updateProfileDialog() {
+      this.toggleProperty('showUserProfileDialog');
     }
   }
 });
