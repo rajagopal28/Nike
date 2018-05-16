@@ -1,34 +1,30 @@
 <div>
   <div>
-    {{pie-chart class="chart-container" options=donutOptions data=data1 responsiveResize=false}}
+    {{pie-chart class="chart-container" options=options1 data=countsByStatus responsiveResize=false}}
+    {{paper-divider}}
   </div>
   <div>
-    {{bar-chart class="chart-container" options=donutOptions data=data3 responsiveResize=false}}
+    {{bar-chart class="chart-container" options=options2 data=countsByMemoCount responsiveResize=false}}
+    {{paper-divider}}
   </div>
   <div>
-    {{pie-chart class="chart-container" options=donutOptions data=data2 responsiveResize=false}}
+    {{pie-chart class="chart-container" options=options3 data=countsByCompletedOnTime responsiveResize=false}}
+    {{paper-divider}}
   </div>
-  <div>
-    {{#paper-radio-group
+  <div class="bg-white">
+    Toggle timeline type: {{#paper-radio-group
       groupValue=(readonly timelineType)
       onChange=(action "toggleTimelineType") as |group|}}
-      {{#group.radio value="days" primary=true}} Days {{/group.radio}}
-      {{#group.radio value="weeks" warn=true}} Weeks {{/group.radio}}
-      {{#group.radio value="months"}} Months {{/group.radio}}
+      {{#group.radio class="display-inline" value="days" primary=true}} Days {{/group.radio}}
+      {{#group.radio class="display-inline" value="weeks" warn=true}} Weeks {{/group.radio}}
+      {{#group.radio class="display-inline" value="months"}} Months {{/group.radio}}
     {{/paper-radio-group}}
-    {{scatter-chart class="chart-container" options=donutOptions data=data4 responsiveResize=false}}
+    {{scatter-chart class="chart-container" options=options4 data=countsByDate responsiveResize=false}}
+    {{paper-divider}}
   </div>
   <div>
-    {{bar-chart class="chart-container" options=donutOptions data=data5 responsiveResize=false}}
-  </div>
-  <div>
-    <ul>
-      <li>Pie-Group by status (done)</li>
-      <li>Bar - tasks based on memo count - lazy, normal, active(done)</li>
-      <li>Pie-Group by completed tasks before, on and overdue even after dueDate(done)</li>
-      <li>Scatter - count of tasks on a day or week or month range(done)</li>
-      <li>Bar - tasks based on time of completion - short, medium, long term tasks</li>
-    </ul>
+    {{bar-chart class="chart-container" options=options5 data=countsByDuration responsiveResize=false}}
+    {{paper-divider}}
   </div>
 </div>
 {{yield}}

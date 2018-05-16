@@ -2,19 +2,7 @@ import Ember from 'ember';
 import { inject as service } from '@ember/service';
 
 export default Ember.Component.extend({
-  data1 : [
-     ['Task', 'Hours per Day'],
-     ['Work', 11],
-     ['Eat', 2],
-     ['Commute', 2],
-     ['Watch TV', 2],
-     ['Sleep', 7],
-   ],
    timelineType: 'days',
-   donutOptions : {
-    title: 'Number of tasks by status',
-    pieHole: 0.4,
-  },
   taskService: service('task-service'),
    init() {
      this._super(...arguments);
@@ -25,7 +13,7 @@ export default Ember.Component.extend({
      this.setDataForChartGroupCountByEndDuration();
    },
    setDataForChartGroupCountByStatus() {
-     let data1 = this.data.reduce((ag, item) =>{
+     let data = this.data.reduce((ag, item) =>{
        let status = item.get('status') || 'NA';
        console.log(ag, item, status);
        ag = ag || {} ;
@@ -34,16 +22,20 @@ export default Ember.Component.extend({
        return ag;
      });
      let countsByStatus = [['Status', 'Count']];
-     Object.keys(data1).forEach((key) => {
-       countsByStatus.push([key, data1[key]]);
+     Object.keys(data).forEach((key) => {
+       countsByStatus.push([key, data[key]]);
      });
-     console.log('data1', data1);
+     console.log('data1', data);
      console.log('countsByStatus', countsByStatus);
-     this.set('data1', countsByStatus);
+     this.set('countsByStatus', countsByStatus);
+     this.set('options1', {
+      title: 'Number of tasks by status',
+      pieHole: 0.4,
+    });
    },
    setDataForChartGroupCountByCompletedOnTime() {
      let categories = ['Early', 'OnTime', 'Late'];
-     let data1 = this.data.reduce((ag, item) =>{
+     let data = this.data.reduce((ag, item) =>{
        let status = item.get('status') || 'NA';
        if(this.get('taskService').isFinalStatus(status)) {
          let dueDate = new Date(item.get('dueDate'));
@@ -66,17 +58,21 @@ export default Ember.Component.extend({
        }
        return ag;
      });
-     let countsByStatus = [['Time Completed', 'Count']];
+     let countsByCompletedOnTime = [['Time Completed', 'Count']];
      categories.forEach((key) => {
-       countsByStatus.push([key, data1[key]]);
+       countsByCompletedOnTime.push([key, data[key]]);
      });
-     console.log('data2', data1);
-     console.log('countsByStatus', countsByStatus);
-     this.set('data2', countsByStatus);
+     console.log('data2', data);
+     console.log('countsByCompletedOnTime', countsByCompletedOnTime);
+     this.set('countsByCompletedOnTime', countsByCompletedOnTime);
+     this.set('options3', {
+      title: 'Number of tasks by Completed Time',
+      pieHole: 0.4,
+    });
    },
    setDataForChartGroupCountByMemoCount() {
      let categories = ['Lazy', 'Normal', 'Active'];
-     let data1 = this.data.reduce((ag, item) =>{
+     let data = this.data.reduce((ag, item) =>{
        let memoCount = item.get('logs').length || 0;
        let dueDate = new Date(item.get('dueDate'));
        let dateCreated = new Date(item.get('dateCreated'));
@@ -98,17 +94,20 @@ export default Ember.Component.extend({
        }
        return ag;
      });
-     let countsByStatus = [['Activity Status', 'Count']];
+     let countsByMemoCount = [['Activity Status', 'Count']];
      categories.forEach((key) => {
-       countsByStatus.push([key, data1[key]]);
+       countsByMemoCount.push([key, data[key]]);
      });
-     console.log('data3', data1);
-     console.log('countsByStatus', countsByStatus);
-     this.set('data3', countsByStatus);
+     console.log('data3', data);
+     console.log('countsByMemoCount', countsByMemoCount);
+     this.set('countsByMemoCount', countsByMemoCount);
+     this.set('options2', {
+      title: 'Number of tasks by Activity status'
+    });
    },
    setDataForChartGroupCountByDate() {
      let timelineType = this.get('timelineType');
-     let data1 = this.data.reduce((ag, item) =>{
+     let data = this.data.reduce((ag, item) =>{
        let memoCount = item.get('logs').length || 0;
        let dueDate = new Date(item.get('dueDate'));
        dueDate.setHours(0, 0, 0, 0);
@@ -132,16 +131,19 @@ export default Ember.Component.extend({
        return ag;
      });
      let countsByDate = [['Time Period', 'Count']];
-     Object.keys(data1).sort().forEach((key) => {
-       countsByDate.push([key, data1[key]]);
+     Object.keys(data).sort().forEach((key) => {
+       countsByDate.push([key, data[key]]);
      });
-     console.log('data4', data1);
+     console.log('data4', data);
      console.log('countsByDate', countsByDate);
-     this.set('data4', countsByDate);
+     this.set('countsByDate', countsByDate);
+     this.set('options4', {
+      title: 'Number of tasks by Timeline'
+    });
    },
    setDataForChartGroupCountByEndDuration() {
      let categories = ['Short', 'Medium', 'Long'];
-     let data1 = this.data.reduce((ag, item) =>{
+     let data = this.data.reduce((ag, item) =>{
        let memoCount = item.get('logs').length || 0;
        let dueDate = new Date(item.get('dueDate'));
        let dateCreated = new Date(item.get('dateCreated'));
@@ -165,11 +167,14 @@ export default Ember.Component.extend({
      });
      let countsByDuration = [['Duration Type', 'Count']];
      categories.forEach((key) => {
-       countsByDuration.push([key, data1[key]]);
+       countsByDuration.push([key, data[key]]);
      });
-     console.log('data3', data1);
+     console.log('data5', data);
      console.log('countsByDuration', countsByDuration);
-     this.set('data5', countsByDuration);
+     this.set('countsByDuration', countsByDuration);
+     this.set('options5', {
+      title: 'Number of tasks by Duration type'
+    });
    },
    actions: {
      toggleTimelineType(timelineType) {
