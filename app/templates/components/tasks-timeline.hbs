@@ -24,7 +24,7 @@
     {{#paper-button primary=false onClick=(action "resetFilter")}}Reset{{/paper-button}}
   </div>
 {{/unless}}
-<h2>timeline</h2>
+<h2 class="centre">Activity Timeline</h2>
 {{#vertical-timeline animate=true as |timeline|}}
   {{#each filteredTasks as |task index|}}
     {{#timeline.block as |block|}}

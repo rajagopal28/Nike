@@ -7,13 +7,17 @@
   {{#card.actions class="layout-row layout-align-start-center" as |actions|}}
     Tags: {{#paper-chips
       readOnly=true
+      class="flex"
       content=task.labels as |item|}}
       <strong>{{item}}</strong>
     {{/paper-chips}}
-    {{#paper-button onClick=(action (transition-to "tasks"))}}Back{{/paper-button}}
+    {{#paper-button primary=true onClick=(action (transition-to "tasks"))}}Back{{/paper-button}}
   {{/card.actions}}
   {{#card.content}}
-    {{task.description}}
+    <strong>DateCreated :</strong>{{format-date task.dateCreated}}
+    <br/><strong>Status :</strong>{{task.status}}
+    <br/><strong>DueDate :</strong>{{format-date task.dueDate}}
+    <br/><strong>Description :</strong>{{task.description}}
   {{/card.content}}
 {{/paper-card}}
 {{yield}}
