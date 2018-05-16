@@ -23,6 +23,7 @@ body {
 }
 .chart-container {
   min-height: 450px;
+  padding: inherit 10%;
 }
 .date-picker-input{
   height: 50px;
@@ -35,4 +36,8 @@ body {
 }
 .bg-white {
   background-color: #fff;
+}
+.app-centre {
+  position: relative;
+  margin: 0 5%;
 }
