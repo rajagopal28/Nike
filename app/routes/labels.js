@@ -8,7 +8,7 @@ export default Ember.Route.extend({
    return [];
  },
  getNameFromValue: function(text) {
-   if(text && text.trim().length > 0) {
+   if(text && text.length > 0) {
      return text.toLowerCase().split(" ").join("_");
    }
    return "";
@@ -19,12 +19,22 @@ export default Ember.Route.extend({
      var newLabel = this.get("store").createRecord('label', {
        displayName: displayText,
        name: this.getNameFromValue(displayText),
-       addedOn: new Date().getTime()
+       dateCreated: new Date().getTime(),
+       dateModified: new Date().getTime()
      });
      newLabel.save();
    },
+   editLabel(label) {
+     console.log('displayName', label.get('displayName'))
+     label.set('name', this.getNameFromValue(''+label.get('displayName')));
+     label.set('dateModified', new Date().getTime());
+     label.save();
+   },
+   deleteLabel(label) {
+     label.destroyRecord();
+   },
    accessDenied() {
-     this.transitionTo('login');
+     this.transitionTo('home');
    }
   }
 });

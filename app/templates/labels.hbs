@@ -1,2 +1,2 @@
 {{#add-label addNewLabel=(route-action "addLabel")}}{{/add-label}}
-{{#view-labels model=model}} {{/view-labels}}
+{{#view-labels editLabelItem=(route-action "editLabel") deleteLabelItem=(route-action "deleteLabel") model=model}} {{/view-labels}}

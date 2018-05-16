@@ -1,19 +1,36 @@
 <div class="all-labels">
+  {{#paper-list}}
   {{#paper-subheader}} List Of Labels {{/paper-subheader}}
   {{#each  model as |label|}}
     {{#paper-item as |controls|}}
-      {{controls.checkbox value=label.checked onChange=(action (mut label.checked))}}
+      <!-- {{paper-icon "phone" class="md-avatar-icon"}} -->
       <div class="md-list-item-text">
-        <p>{{label.displayName}}</p>
-        <h4>{{label.name}}</h4>
-        <h5>Added on: {{label.addedOn}}</h5>
+        <p><strong>Display Name:</strong>{{label.displayName}}</p>
+        <h4><strong>Tag Name:</strong>{{label.name}}</h4>
+        <h5><strong>Added on: </strong>{{format-date label.dateCreated}}</h5>
       </div>
       <div class="md-secondary-container">
-        {{#controls.button secondary=true iconButton=true onClick=(action "editLabel" label)}}
+        {{#controls.button secondary=true iconButton=true onClick=(action "editLabelDialog" label)}}
           {{paper-icon "mode-edit"}}
         {{/controls.button}}
+          {{#controls.button secondary=true iconButton=true onClick=(action "deleteLabelDialog" label)}}
+            {{paper-icon "delete"}}
+          {{/controls.button}}
       </div>
     {{/paper-item}}
+    {{paper-divider}}
   {{/each}}
+  {{/paper-list}}
 </div>
+{{#if showDeletedWarning}}
+  {{#custom-warning-dialog content="Are you sure to Delete the Label?" onConfirm=(action "deleteLabel" selectedLabel) onCancel=(action "hideDialog")}} {{/custom-warning-dialog}}
+{{/if}}
+{{#if showEditDialog}}
+  {{#custom-warning-dialog content='Update Label' hideOkButton=true onCancel=(action "hideDialog")}}
+    <div class="layout layout-sm-column">
+      {{paper-input class="flex" label="Label text" type="text" value=selectedLabel.displayName onChange=(action (mut selectedLabel.displayName))}}
+      {{#paper-button primary=true onClick=(action "editLabel" selectedLabel)}}Update Label{{/paper-button}}
+    </div>
+  {{/custom-warning-dialog}}
+{{/if}}
 {{yield}}
