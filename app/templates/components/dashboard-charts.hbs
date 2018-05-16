@@ -9,11 +9,21 @@
     {{pie-chart class="chart-container" options=donutOptions data=data2 responsiveResize=false}}
   </div>
   <div class="chart-container">
+    {{#paper-radio-group
+      groupValue=(readonly timelineType)
+      onChange=(action "toggleTimelineType") as |group|}}
+      {{#group.radio value="days" primary=true}} Days {{/group.radio}}
+      {{#group.radio value="weeks" warn=true}} Weeks {{/group.radio}}
+      {{#group.radio value="months"}} Months {{/group.radio}}
+    {{/paper-radio-group}}
+    {{scatter-chart class="chart-container" options=donutOptions data=data4 responsiveResize=false}}
+  </div>
+  <div class="chart-container">
     <ul>
       <li>Pie-Group by status (done)</li>
       <li>Bar - tasks based on memo count - lazy, normal, active(done)</li>
       <li>Pie-Group by completed tasks before, on and overdue even after dueDate(done)</li>
-      <li>Scatter - count of tasks on a day or week or month range</li>
+      <li>Scatter - count of tasks on a day or week or month range(done)</li>
       <li>Bar - tasks based on time of completion - short, medium, long term tasks</li>
     </ul>
   </div>

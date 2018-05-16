@@ -10,6 +10,7 @@ export default Ember.Component.extend({
      ['Watch TV', 2],
      ['Sleep', 7],
    ],
+   timelineType: 'days',
    donutOptions : {
     title: 'Number of tasks by status',
     pieHole: 0.4,
@@ -20,6 +21,7 @@ export default Ember.Component.extend({
      this.setDataForChartGroupCountByStatus();
      this.setDataForChartGroupCountByCompletedOnTime();
      this.setDataForChartGroupCountByMemoCount();
+     this.setDataForChartGroupCountByDate();
    },
    setDataForChartGroupCountByStatus() {
      let data1 = this.data.reduce((ag, item) =>{
@@ -102,5 +104,45 @@ export default Ember.Component.extend({
      console.log('data3', data1);
      console.log('countsByStatus', countsByStatus);
      this.set('data3', countsByStatus);
+   },
+   setDataForChartGroupCountByDate() {
+     let timelineType = this.get('timelineType');
+     let data1 = this.data.reduce((ag, item) =>{
+       let memoCount = item.get('logs').length || 0;
+       let dueDate = new Date(item.get('dueDate'));
+       dueDate.setHours(0, 0, 0, 0);
+       let dateString = dueDate.toDateString();
+       let timeKey = dateString; //'' + dueDate.getDate() + '-'+ (dueDate.getMonth()+1) +'-'+ dueDate.getFullYear();
+       if(timelineType === 'weeks') {
+        timeKey = 'WeekNumber-Year String';
+        var onejan = new Date(dueDate.getFullYear(),0,1);
+        var millisecsInDay = 86400000;
+        var weekNum = Math.ceil((((dueDate - onejan) /millisecsInDay) + onejan.getDay()+1)/7);
+        timeKey = 'Week ' + weekNum + '-' + dueDate.getFullYear();
+       }
+       if(timelineType === 'months') {
+          let stringMonth = dateString.split(" ")[1];
+          timeKey = stringMonth + '-' + dueDate.getFullYear();
+       }
+       console.log(ag, item, timeKey);
+       ag = ag || {} ;
+       ag[timeKey] =  ag[timeKey] || 0;
+       ag[timeKey] += 1;
+       return ag;
+     });
+     let countsByDate = [['Time Period', 'Count']];
+     Object.keys(data1).sort().forEach((key) => {
+       countsByDate.push([key, data1[key]]);
+     });
+     console.log('data4', data1);
+     console.log('countsByDate', countsByDate);
+     this.set('data4', countsByDate);
+   },
+   actions: {
+     toggleTimelineType(timelineType) {
+       console.log('timelineType', timelineType);
+       this.set('timelineType', timelineType);
+       this.setDataForChartGroupCountByDate();
+     }
    }
 });
