@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
 export default Ember.Component.extend({
   data1 : [
@@ -13,14 +14,18 @@ export default Ember.Component.extend({
     title: 'Number of tasks by status',
     pieHole: 0.4,
   },
+  taskService: service('task-service'),
    init() {
      this._super(...arguments);
+     this.setDataForChartGroupCountByStatus();
+     this.setDataForChartGroupCountByCompletedOnTime();
+     this.setDataForChartGroupCountByMemoCount();
+   },
+   setDataForChartGroupCountByStatus() {
      let data1 = this.data.reduce((ag, item) =>{
        let status = item.get('status') || 'NA';
        console.log(ag, item, status);
-       if (!ag){
-         ag = {};
-       }
+       ag = ag || {} ;
        ag[status] =  ag[status] || 0;
        ag[status] += 1;
        return ag;
@@ -32,5 +37,70 @@ export default Ember.Component.extend({
      console.log('data1', data1);
      console.log('countsByStatus', countsByStatus);
      this.set('data1', countsByStatus);
+   },
+   setDataForChartGroupCountByCompletedOnTime() {
+     let categories = ['Early', 'OnTime', 'Late'];
+     let data1 = this.data.reduce((ag, item) =>{
+       let status = item.get('status') || 'NA';
+       if(this.get('taskService').isFinalStatus(status)) {
+         let dueDate = new Date(item.get('dueDate'));
+         let completionDate = new Date(item.get('dateModified'));
+         dueDate.setHours(0, 0, 0, 0);
+         completionDate.setHours(0, 0, 0, 0);
+         let completionDateTS = completionDate.getTime();
+         let dueDateTS = dueDate.getTime();
+         let category = categories[0];
+         if(completionDateTS === dueDateTS) {
+           category = categories[1];
+         }
+         if(completionDateTS > dueDateTS) {
+           category = categories[2];
+         }
+         console.log(ag, item, category);
+         ag = ag || {} ;
+         ag[category] =  ag[category] || 0;
+         ag[category] += 1;
+       }
+       return ag;
+     });
+     let countsByStatus = [['Time Completed', 'Count']];
+     categories.forEach((key) => {
+       countsByStatus.push([key, data1[key]]);
+     });
+     console.log('data2', data1);
+     console.log('countsByStatus', countsByStatus);
+     this.set('data2', countsByStatus);
+   },
+   setDataForChartGroupCountByMemoCount() {
+     let categories = ['Lazy', 'Normal', 'Active'];
+     let data1 = this.data.reduce((ag, item) =>{
+       let memoCount = item.get('logs').length || 0;
+       let dueDate = new Date(item.get('dueDate'));
+       let dateCreated = new Date(item.get('dateCreated'));
+       dueDate.setHours(0, 0, 0, 0);
+       dateCreated.setHours(0, 0, 0, 0);
+       let daysDifference = dueDate - dateCreated;
+       if(daysDifference > 0) {
+         let category = categories[1];
+         if(memoCount < daysDifference/2) {
+           category = categories[0];
+         }
+         if(memoCount > daysDifference/2) {
+           category = categories[2];
+         }
+         console.log(ag, item, category);
+         ag = ag || {} ;
+         ag[category] =  ag[category] || 0;
+         ag[category] += 1;
+       }
+       return ag;
+     });
+     let countsByStatus = [['Activity Status', 'Count']];
+     categories.forEach((key) => {
+       countsByStatus.push([key, data1[key]]);
+     });
+     console.log('data3', data1);
+     console.log('countsByStatus', countsByStatus);
+     this.set('data3', countsByStatus);
    }
 });

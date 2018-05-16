@@ -12,5 +12,8 @@ export default Ember.Service.extend({
   },
   getFinalStatus() {
     return this.get('statuses')[this.FINAL_STATUS_INDEX];
+  },
+  isFinalStatus(status) {
+    return status === this.getFinalStatus();
   }
 });
