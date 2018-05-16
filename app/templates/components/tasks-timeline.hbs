@@ -38,12 +38,22 @@
       {{#block.content as |content|}}
         <h3>{{task.title}}</h3>
         {{task.description}}
-        {{#paper-button iconButton=true onClick=(action "deleteTaskWarning" task)}}{{paper-icon "delete"}}{{/paper-button}}
-        {{#paper-button iconButton=true onClick=(action "editTask" task)}}{{paper-icon "edit"}}{{/paper-button}}
+        {{#paper-button iconButton=true onClick=(action "deleteTaskWarning" task)}}
+          {{paper-icon "delete"}}
+          {{#paper-tooltip}}Delete{{/paper-tooltip}}
+        {{/paper-button}}
+        {{#paper-button iconButton=true onClick=(action "editTask" task)}}
+          {{paper-icon "edit"}}
+          {{#paper-tooltip}} Update{{/paper-tooltip}}
+        {{/paper-button}}
         {{#unless disableFiltering}}
-          {{#paper-button iconButton=true onClick=(action "viewTask" task)}}{{paper-icon "visibility"}}{{/paper-button}}
+          {{#paper-button iconButton=true onClick=(action "viewTask" task)}}{{paper-icon "visibility"}}
+          {{#paper-tooltip}} View {{/paper-tooltip}}{{/paper-button}}
           {{#if (not-eq task.status finalTaskStatusValue)}}
-            {{#paper-button iconButton=true onClick=(action "completeTaskWarning" task)}}{{paper-icon "done"}}{{/paper-button}}
+            {{#paper-button iconButton=true onClick=(action "completeTaskWarning" task)}}
+              {{paper-icon "done"}}
+              {{#paper-tooltip}}Complete Task{{/paper-tooltip}}
+            {{/paper-button}}
           {{/if}}
         {{/unless}}
         {{#content.date}}{{format-date task.dueDate}}{{/content.date}}
