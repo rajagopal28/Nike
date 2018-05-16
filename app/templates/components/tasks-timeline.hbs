@@ -1,29 +1,42 @@
-{{#unless disableFiltering}}
-  <div class="layout layout-sm-column">
-    {{#paper-chips
-      readOnly=false
-      removeItem=(action "removeLabel")
-      addItem=(action "addLabel")
-      placeholder="Add a tag"
-      options=labels
-      searchField="name"
-      noMatchesMessage="Not found. Click to add."
-      content=filterLabels as |item|}}
-      <strong>{{item.name}}</strong>
-    {{/paper-chips}}
-    {{#paper-select
-      disabled=false
-      label="Status"
-      options=statusList
-      selected=filterStatus
-      onChange=(action (mut filterStatus))
-      as |status|}}
-      {{status}}
-    {{/paper-select}}
+{{#paper-card as |card|}}
+  {{#card.title as |title|}}
+    {{#title.text as |text|}}
+      {{#text.headline}}Filter Timeline{{/text.headline}}
+    {{/title.text}}
+  {{/card.title}}
+  {{#card.content}}
+    {{#unless disableFiltering}}
+      <div class="layout layout-sm-column">
+        {{#paper-chips
+          readOnly=false
+          class="flex"
+          removeItem=(action "removeLabel")
+          addItem=(action "addLabel")
+          placeholder="Add a tag"
+          options=labels
+          searchField="name"
+          noMatchesMessage="Not found. Click to add."
+          content=filterLabels as |item|}}
+          <strong>{{item.name}}</strong>
+        {{/paper-chips}}
+        {{#paper-select
+          disabled=false
+          class="flex"
+          label="Status"
+          options=statusList
+          selected=filterStatus
+          onChange=(action (mut filterStatus))
+          as |status|}}
+          {{status}}
+        {{/paper-select}}
+      </div>
+    {{/unless}}
+  {{/card.content}}
+  {{#card.actions}}
     {{#paper-button primary=true onClick=(action "applyFilter")}}Filter{{/paper-button}}
     {{#paper-button primary=false onClick=(action "resetFilter")}}Reset{{/paper-button}}
-  </div>
-{{/unless}}
+  {{/card.actions}}
+{{/paper-card}}
 <h2 class="centre">Activity Timeline</h2>
 {{#vertical-timeline animate=true as |timeline|}}
   {{#each filteredTasks as |task index|}}
