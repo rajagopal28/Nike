@@ -22,6 +22,7 @@ export default Ember.Component.extend({
      this.setDataForChartGroupCountByCompletedOnTime();
      this.setDataForChartGroupCountByMemoCount();
      this.setDataForChartGroupCountByDate();
+     this.setDataForChartGroupCountByEndDuration();
    },
    setDataForChartGroupCountByStatus() {
      let data1 = this.data.reduce((ag, item) =>{
@@ -81,7 +82,7 @@ export default Ember.Component.extend({
        let dateCreated = new Date(item.get('dateCreated'));
        dueDate.setHours(0, 0, 0, 0);
        dateCreated.setHours(0, 0, 0, 0);
-       let daysDifference = dueDate - dateCreated;
+       let daysDifference = (dueDate - dateCreated)/(1000 * 3600 * 24);
        if(daysDifference > 0) {
          let category = categories[1];
          if(memoCount < daysDifference/2) {
@@ -137,6 +138,38 @@ export default Ember.Component.extend({
      console.log('data4', data1);
      console.log('countsByDate', countsByDate);
      this.set('data4', countsByDate);
+   },
+   setDataForChartGroupCountByEndDuration() {
+     let categories = ['Short', 'Medium', 'Long'];
+     let data1 = this.data.reduce((ag, item) =>{
+       let memoCount = item.get('logs').length || 0;
+       let dueDate = new Date(item.get('dueDate'));
+       let dateCreated = new Date(item.get('dateCreated'));
+       dueDate.setHours(0, 0, 0, 0);
+       dateCreated.setHours(0, 0, 0, 0);
+       let daysDifference = (dueDate - dateCreated)/(1000 * 3600 * 24);
+       if(daysDifference > 0) {
+         let category = categories[1];
+         if(daysDifference < 10/*Days*/) {
+           category = categories[0];
+         }
+         if(daysDifference > 30/*Days*/) {
+           category = categories[2];
+         }
+         console.log(ag, item, category);
+         ag = ag || {} ;
+         ag[category] =  ag[category] || 0;
+         ag[category] += 1;
+       }
+       return ag;
+     });
+     let countsByDuration = [['Duration Type', 'Count']];
+     categories.forEach((key) => {
+       countsByDuration.push([key, data1[key]]);
+     });
+     console.log('data3', data1);
+     console.log('countsByDuration', countsByDuration);
+     this.set('data5', countsByDuration);
    },
    actions: {
      toggleTimelineType(timelineType) {

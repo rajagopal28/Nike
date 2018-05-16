@@ -1,14 +1,14 @@
 <div>
-  <div class="chart-container">
+  <div>
     {{pie-chart class="chart-container" options=donutOptions data=data1 responsiveResize=false}}
   </div>
-  <div class="chart-container">
+  <div>
     {{bar-chart class="chart-container" options=donutOptions data=data3 responsiveResize=false}}
   </div>
-  <div class="chart-container">
+  <div>
     {{pie-chart class="chart-container" options=donutOptions data=data2 responsiveResize=false}}
   </div>
-  <div class="chart-container">
+  <div>
     {{#paper-radio-group
       groupValue=(readonly timelineType)
       onChange=(action "toggleTimelineType") as |group|}}
@@ -18,7 +18,10 @@
     {{/paper-radio-group}}
     {{scatter-chart class="chart-container" options=donutOptions data=data4 responsiveResize=false}}
   </div>
-  <div class="chart-container">
+  <div>
+    {{bar-chart class="chart-container" options=donutOptions data=data5 responsiveResize=false}}
+  </div>
+  <div>
     <ul>
       <li>Pie-Group by status (done)</li>
       <li>Bar - tasks based on memo count - lazy, normal, active(done)</li>
