@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   task: null,
   labels:[],
   memoMode: false,
+  showTitle: false,
   statusList: Ember.A(),
   taskService: service('task-service'),
   init() {

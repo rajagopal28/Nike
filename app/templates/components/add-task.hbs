@@ -1,33 +1,46 @@
-<div class="layout layout-sm-column">
-  {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
-  {{#paper-button primary=true onClick=(action "addTask")}}Submit{{/paper-button}}
-</div>
-{{#unless memoMode}}
+{{#paper-card as |card|}}
+  {{#if showTitle}}
+    {{#card.title as |title|}}
+      {{#title.text as |text|}}
+        {{#text.headline}}Add new item{{/text.headline}}
+      {{/title.text}}
+    {{/card.title}}
+  {{/if}}
+  {{#card.content}}
   <div class="layout layout-sm-column">
-    {{#paper-chips
-      readOnly=false
-      removeItem=(action "removeLabel")
-      addItem=(action "addLabel")
-      placeholder="Add a tag"
-      options=labels
-      searchField="name"
-      noMatchesMessage="Not found. Click to add."
-      content=task.labels as |item|}}
-      <strong>{{item.name}}</strong>
-    {{/paper-chips}}
-    {{#paper-select
-      disabled=false
-      label="Status"
-      options=statusList
-      selected=task.status
-      onChange=(action (mut task.status))
-      as |status|}}
-      {{status}}
-    {{/paper-select}}
+    {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
+    {{pikaday-input class="date-picker-input" minDate=task.minDate value=task.dueDateString placeholder="Due date of task" onSelection=(action (mut task.dueDate))}}
   </div>
-{{/unless}}
-<div class="layout layout-sm-column">
-  {{paper-input class="flex" label="Description Text" type="text" value=task.description onChange=(action (mut task.description))}}
-  {{pikaday-input class="flex" minDate=task.minDate value=task.dueDateString placeholder="Due date of task" onSelection=(action (mut task.dueDate))}}
-</div>
+  {{#unless memoMode}}
+    <div class="layout layout-sm-column">
+      {{#paper-chips
+        readOnly=false
+        removeItem=(action "removeLabel")
+        addItem=(action "addLabel")
+        placeholder="Add a tag"
+        options=labels
+        class="flex"
+        searchField="name"
+        noMatchesMessage="Not found. Click to add."
+        content=task.labels as |item|}}
+        <strong>{{item.name}}</strong>
+      {{/paper-chips}}
+      {{#paper-select
+        disabled=false
+        label="Status"
+        options=statusList
+        selected=task.status
+        class="flex"
+        onChange=(action (mut task.status))
+        as |status|}}
+        {{status}}
+      {{/paper-select}}
+    </div>
+  {{/unless}}
+  <div class="layout layout-sm-column">
+    {{paper-input class="flex" label="Description Text" textarea=true block=true maxlength=150 passThru=(hash rows=5 maxRows=5) value=task.description onChange=(action (mut task.description))}}
+    {{#paper-button primary=true onClick=(action "addTask")}}Submit{{/paper-button}}
+  </div>
+  {{/card.content}}
+{{/paper-card}}
 {{yield}}
