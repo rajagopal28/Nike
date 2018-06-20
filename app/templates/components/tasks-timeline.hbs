@@ -1,3 +1,10 @@
+{{#paper-toolbar as |toolbar|}}
+   {{#toolbar.tools}}
+     {{#paper-button onClick=(action "addTaskDialog")}}
+       Add new Task
+     {{/paper-button}}
+   {{/toolbar.tools}}
+ {{/paper-toolbar}}
 {{#paper-card as |card|}}
   {{#card.title as |title|}}
     {{#title.text as |text|}}
@@ -78,8 +85,13 @@
   {{#custom-warning-dialog content=deleteTaskWarningContent onConfirm=(action "deleteTask" selectedTask) onCancel=(action "hideDialog")}} {{/custom-warning-dialog}}
 {{/if}}
 {{#if showEditTaskDialog}}
-  {{#custom-warning-dialog content='UpdateData' hideOkButton=true onConfirm=(action "updateTaskData" selectedTask) onCancel=(action "hideDialog")}}
+  {{#custom-warning-dialog content='UpdateData' hideOkButton=true onCancel=(action "hideDialog")}}
     {{#add-task labels=labels memoMode=disableFiltering inputTask=selectedTask addNewTask=(action "updateTaskData")}} {{/add-task}}
+  {{/custom-warning-dialog}}
+{{/if}}
+{{#if showAddTaskDialog}}
+  {{#custom-warning-dialog content='AddTask' hideOkButton=true onCancel=(action "hideDialog")}}
+    {{#add-task labels=labels memoMode=disableFiltering addNewTask=(action "addTaskItem")}} {{/add-task}}
   {{/custom-warning-dialog}}
 {{/if}}
 {{#if showCompleteTaskDialog}}

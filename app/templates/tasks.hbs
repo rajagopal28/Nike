@@ -1,3 +1,2 @@
-{{#add-task showTitle=true class="layout-column" labels=labels addNewTask=(route-action "addTask")}}{{/add-task}}
-{{#tasks-timeline labels=labels tasks=tasks updateTask=(route-action "updateTaskItem") removeTask=(route-action "deleteTaskItem") viewTask=(route-action "viewTaskItem")}}{{/tasks-timeline}}
+{{#tasks-timeline labels=labels tasks=tasks addTaskCall=(route-action "addTask") updateTask=(route-action "updateTaskItem") removeTask=(route-action "deleteTaskItem") viewTask=(route-action "viewTaskItem")}}{{/tasks-timeline}}
 {{outlet}}

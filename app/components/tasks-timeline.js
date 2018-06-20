@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   selectedTask: null,
   showDeleteWarning: false,
   showEditTaskDialog: false,
+  showAddTaskDialog: false,
   filteredTasks : Ember.A(),
   filterLabels: Ember.A(),
   disableFiltering: false,
@@ -58,6 +59,7 @@ export default Ember.Component.extend({
      this.set('showDeleteWarning', false);
      this.set('showEditTaskDialog', false);
      this.set('showCompleteTaskDialog', false);
+     this.set('showAddTaskDialog', false);
    },
    editTask(task) {
     console.log('new Date(task.dueDate)', task.get('dueDate'));
@@ -114,6 +116,14 @@ export default Ember.Component.extend({
      this.set('selectedTask.status', this.get('taskService').getFinalStatus());
      this.sendAction('updateTask', this.selectedTask);
      this.set('showCompleteTaskDialog', false);
+   },
+   addTaskDialog() {
+     this.set('showAddTaskDialog', true);
+   },
+   addTaskItem(item) {
+     console.log('in addTaskItem of timeine-component', item);
+     this.sendAction('addTaskCall', item);
+     this.set('showAddTaskDialog', false);
    }
   }
 });

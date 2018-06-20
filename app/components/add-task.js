@@ -56,7 +56,7 @@ export default Ember.Component.extend({
        dueDate: this.task.dueDate.getTime(),
        labels: labels,
        dateCreated: now,
-       logs:{},
+       logs:[],
        status : this.task.status,
        dateModifited: now
      });
