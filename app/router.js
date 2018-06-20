@@ -8,10 +8,11 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.authenticatedRoute('labels');
-  this.route('tasks');
+  this.authenticatedRoute('tasks');
   this.route('users');
-  this.route('task', { path: '/task/:task_id' });
-  this.route('dashboard');
+  this.authenticatedRoute('task', { path: '/task/:task_id' });
+  this.authenticatedRoute('dashboard');
+  this.route('home');
 });
 
 export default Router;

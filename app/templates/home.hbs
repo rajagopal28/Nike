@@ -1,0 +1,22 @@
+{{#paper-card as |card|}}
+  {{#paper-toolbar}}
+    {{#paper-toolbar-tools}}
+      <h2>
+        Toolbar with Icon Buttons
+      </h2>
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
+  {{card.image  class="controlled-background" src="https://wallpaper-house.com/data/out/5/wallpaper2you_54636.jpg" alt="Washed Out" title="Washed Out"}}
+  {{#card.title as |title|}}
+    {{#title.text as |text|}}
+      {{#text.headline}}Welcome to Nike{{/text.headline}}
+      {{#text.subhead}}JustDoIt{{/text.subhead}}
+    {{/title.text}}
+    {{#card.content}}
+        <p>
+          Ember based UI application, with the tag line 'Just do it', with an intend to built a timeline based todo application. The primary objective of thia app is to visually track your to-dos based on timeline and prioity in which the task has been added. The is also categorizing of tasks and adding time based memos to keep track of your progress towards completing it. There is also a visual dashboard to visualise your activities.
+        </p>
+      {{/card.content}}
+    {{/card.title}}
+{{/paper-card}}
+{{outlet}}
