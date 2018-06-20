@@ -4,13 +4,20 @@ import { inject as service } from '@ember/service';
 export default Ember.Component.extend({
    timelineType: 'days',
   taskService: service('task-service'),
+  authentication: service(),
    init() {
      this._super(...arguments);
-     this.setDataForChartGroupCountByStatus();
-     this.setDataForChartGroupCountByCompletedOnTime();
-     this.setDataForChartGroupCountByMemoCount();
-     this.setDataForChartGroupCountByDate();
-     this.setDataForChartGroupCountByEndDuration();
+     if(Object.keys(this.data).length !== 0) {
+       console.log('authenticated in dashboard-component');
+       this.setDataForChartGroupCountByStatus();
+       this.setDataForChartGroupCountByCompletedOnTime();
+       this.setDataForChartGroupCountByMemoCount();
+       this.setDataForChartGroupCountByDate();
+       this.setDataForChartGroupCountByEndDuration();
+       this.set('isAuthenticated', true);
+     } else {
+       this.set('isAuthenticated', false);
+     }
    },
    setDataForChartGroupCountByStatus() {
      let data = this.data.reduce((ag, item) =>{

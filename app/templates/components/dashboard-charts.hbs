@@ -1,30 +1,34 @@
-<div class="app-centre">
-  <div>
-    {{pie-chart class="chart-container" options=options1 data=countsByStatus responsiveResize=false}}
-    {{paper-divider}}
+{{#if isAuthenticated}}
+  <div class="app-centre">
+    <div>
+      {{pie-chart class="chart-container" options=options1 data=countsByStatus responsiveResize=false}}
+      {{paper-divider}}
+    </div>
+    <div>
+      {{bar-chart class="chart-container" options=options2 data=countsByMemoCount responsiveResize=false}}
+      {{paper-divider}}
+    </div>
+    <div>
+      {{pie-chart class="chart-container" options=options3 data=countsByCompletedOnTime responsiveResize=false}}
+      {{paper-divider}}
+    </div>
+    <div class="bg-white">
+      Toggle timeline type: {{#paper-radio-group
+        groupValue=(readonly timelineType)
+        onChange=(action "toggleTimelineType") as |group|}}
+        {{#group.radio class="display-inline" value="days" primary=true}} Days {{/group.radio}}
+        {{#group.radio class="display-inline" value="weeks" warn=true}} Weeks {{/group.radio}}
+        {{#group.radio class="display-inline" value="months"}} Months {{/group.radio}}
+      {{/paper-radio-group}}
+      {{scatter-chart class="chart-container" options=options4 data=countsByDate responsiveResize=false}}
+      {{paper-divider}}
+    </div>
+    <div>
+      {{bar-chart class="chart-container" options=options5 data=countsByDuration responsiveResize=false}}
+      {{paper-divider}}
+    </div>
   </div>
-  <div>
-    {{bar-chart class="chart-container" options=options2 data=countsByMemoCount responsiveResize=false}}
-    {{paper-divider}}
-  </div>
-  <div>
-    {{pie-chart class="chart-container" options=options3 data=countsByCompletedOnTime responsiveResize=false}}
-    {{paper-divider}}
-  </div>
-  <div class="bg-white">
-    Toggle timeline type: {{#paper-radio-group
-      groupValue=(readonly timelineType)
-      onChange=(action "toggleTimelineType") as |group|}}
-      {{#group.radio class="display-inline" value="days" primary=true}} Days {{/group.radio}}
-      {{#group.radio class="display-inline" value="weeks" warn=true}} Weeks {{/group.radio}}
-      {{#group.radio class="display-inline" value="months"}} Months {{/group.radio}}
-    {{/paper-radio-group}}
-    {{scatter-chart class="chart-container" options=options4 data=countsByDate responsiveResize=false}}
-    {{paper-divider}}
-  </div>
-  <div>
-    {{bar-chart class="chart-container" options=options5 data=countsByDuration responsiveResize=false}}
-    {{paper-divider}}
-  </div>
-</div>
+{{else}}
+  <div class="app-centre"> You should be authenticated to view this page!! </div> 
+{{/if}}
 {{yield}}

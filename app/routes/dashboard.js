@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   authentication: Ember.inject.service(),
   model() {
    if(this.get('session.uid')) {
-     console.log('inside model if...');
+     console.log('inside model if... dashboard');
      let authService = this.get('authentication');
      let user = this.get('authentication').getUser();
      return user.get('tasks');
