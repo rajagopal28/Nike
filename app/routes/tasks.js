@@ -7,7 +7,7 @@ export default Ember.Route.extend(FindQuery, {
    if(this.get('session.uid')) {
      console.log('inside model if...');
      let authService = this.get('authentication');
-     let user = this.get('authentication').getUser();
+     let user = authService.getUser();
      return Ember.RSVP.hash({
       tasks: user ? user.get('tasks') : [],
       labels: this.store.findAll('label'),
@@ -31,16 +31,21 @@ export default Ember.Route.extend(FindQuery, {
      taskItem.save().then(() => user.save());
    },
    updateTaskItem(taskRecord, updatedTaskContent) {
+     let isTimeChanged = false;
      if(updatedTaskContent) {
-         taskRecord.set('title',updatedTaskContent.title);
-         taskRecord.set('description',updatedTaskContent.description);
-         taskRecord.set('dueDate',updatedTaskContent.dueDate);
-         taskRecord.set('dateModified',new Date().getTime());
-         taskRecord.set('status',updatedTaskContent.status);
-         taskRecord.set('minDate',updatedTaskContent.minDate);
-         taskRecord.set('labels',updatedTaskContent.labels);
+      isTimeChanged = taskRecord.get('dueDate') !== updatedTaskContent.dueDate;
+      taskRecord.set('title',updatedTaskContent.title);
+      taskRecord.set('description',updatedTaskContent.description);
+      taskRecord.set('dueDate',updatedTaskContent.dueDate);
+      taskRecord.set('dateModified',new Date().getTime());
+      taskRecord.set('status',updatedTaskContent.status);
+      taskRecord.set('minDate',updatedTaskContent.minDate);
+      taskRecord.set('labels',updatedTaskContent.labels);
      }
      taskRecord.save();
+     if(isTimeChanged) {
+       this.sortAndSaveTasks();
+     }
    },
    deleteTaskItem(task) {
     let user = this.get('authentication').getUser();
@@ -59,6 +64,11 @@ export default Ember.Route.extend(FindQuery, {
           });
        });
      });
+   },
+   sortAndSaveTasks() {
+     let user = this.get('authentication').getUser();
+     user.get('tasks').sort((a, b) => a.get('dueDate') - b.get('dueDate'));
+     user.save();
    },
    viewTaskItem(task) {
      this.transitionTo('task', task.get('id'));
