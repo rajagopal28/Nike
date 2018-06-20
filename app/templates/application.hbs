@@ -3,13 +3,7 @@
   {{outlet}}
   {{#if session.isAuthenticated}}
       {{#paper-button primary=true onClick=(route-action "signOut")}}Sign out{{/paper-button}}
-    <h2>List of Users</h2>
-    <ul>
-      {{#each model as |scientist|}}
-        <li>{{scientist.displayName}}</li>
-      {{/each}}
-    </ul>
   {{/if}}
-  {{#login-component session=session loginAction=(route-action "signIn") session=session logoutAction=(route-action "signOut") }}{{/login-component}}
+  {{#login-component class="centre" session=session loginAction=(route-action "signIn") session=session logoutAction=(route-action "signOut") }}{{/login-component}}
 </div>
 {{/navigation-component}}

@@ -41,6 +41,9 @@
     {{#paper-content padding=true}}
       {{#paper-list}}
         {{#paper-item}}
+          {{#paper-button onClick=(action "transitionTo" "home")}}Home{{/paper-button}}
+        {{/paper-item}}
+        {{#paper-item}}
           {{#paper-button onClick=(action "transitionTo" "dashboard")}}Dashboard Link{{/paper-button}}
         {{/paper-item}}
         {{#paper-item}}

@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   leftSideBarLockedOpen: false,
   leftSideBarOpen: false,
   showUserProfileDialog: false,
+  isAuthenticated: false,
   actions : {
     toggle(property) {
       this.toggleProperty(property);

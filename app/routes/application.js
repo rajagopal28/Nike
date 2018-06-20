@@ -31,6 +31,7 @@ export default Ember.Route.extend({
    signOut() {
      this.get('session').close();
      this.get('authentication').reset();
+     this.transitionTo('home');
    }
  }
 });
