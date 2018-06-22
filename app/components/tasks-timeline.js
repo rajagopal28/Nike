@@ -23,6 +23,7 @@ export default Ember.Component.extend({
   },
   didInsertElement() {
     this.filterTasksWithLabels();
+    this.setAnalyticsOfTasksNeedingAttention();
   },
   filterTasksWithLabels(){
     let filteredTasks = this.get('tasks');
@@ -43,6 +44,50 @@ export default Ember.Component.extend({
       return false;
     }
     return subset.every((value) => superset.indexOf(value) >= 0);
+  },
+  setAnalyticsOfTasksNeedingAttention() {
+    let data = this.tasks.reduce((ag, item) =>{
+      let status = item.get('status') || 'NA';
+      console.log(ag, item, status);
+      ag = ag || {
+        late : {count: 0, label: 'exposure-zero'},
+        tooLate: {count: 0, label: 'exposure-zero'},
+        upcoming: {count: 0, label: 'exposure-zero'},
+        onTrack: {count: 0, label: 'exposure-zero'}
+      } ;
+      let now = new Date().getTime();
+      if(!this.get('taskService').isFinalStatus(status)) {
+        let daysFactor = 1000*60*60*24; // milliseconds to days
+        let daysDifference = (item.get('dueDate')-now)/ daysFactor;
+        if(item.get('dueDate')<now) { // late or too late
+          daysDifference *= -1;
+          if (daysDifference >0 && daysDifference <=10) {
+            ag['late'].count += 1;
+            let _te = ag['late'].count < 10 ? ag['late'].count : '9-plus';
+            ag['late'].label = 'filter-' + _te;
+          }
+          if (daysDifference > 10) {
+            ag['tooLate'].count += 1;
+            let _te = ag['tooLate'].count < 10 ? ag['tooLate'].count : '9-plus';
+            ag['tooLate'].label = 'filter-' + _te;
+          }
+        } else { // on track or needs attention
+          if (daysDifference > 0 && daysDifference <=10) {
+            ag['upcoming'].count += 1;
+            let _te = ag['upcoming'].count < 10 ? ag['upcoming'].count : '9-plus';
+            ag['upcoming'].label = 'filter-' + _te;
+          }
+          if (daysDifference > 10) {
+            ag['onTrack'].count += 1;
+            let _te = ag['onTrack'].count < 10 ? ag['onTrack'].count : '9-plus';
+            ag['onTrack'].label = 'filter-' + _te;
+          }
+        }
+      }
+      return ag;
+    });
+    console.log('manipulating..statusCount', data);
+    this.set('statusCount', data);
   },
   actions: {
     deleteTask(task) {

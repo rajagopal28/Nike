@@ -1,10 +1,22 @@
-{{#paper-toolbar as |toolbar|}}
-   {{#toolbar.tools}}
-     {{#paper-button onClick=(action "addTaskDialog")}}
-       Add new Task
-     {{/paper-button}}
-   {{/toolbar.tools}}
- {{/paper-toolbar}}
+{{#paper-toolbar accent=true}}
+  {{#paper-toolbar-tools}}
+    {{#paper-button onClick=(action "addTaskDialog")}}
+      {{paper-icon "add"}} Add new Task
+    {{/paper-button}}
+    {{#paper-button}}
+      {{paper-icon statusCount.tooLate.label}} ({{statusCount.tooLate.count}}) Tasks are Ways Past OverDue
+    {{/paper-button}}
+    {{#paper-button }}
+      {{paper-icon statusCount.late.label}} ({{statusCount.late.count}}) Tasks are OverDue
+    {{/paper-button}}
+    {{#paper-button}}
+      {{paper-icon statusCount.upcoming.label}} ({{statusCount.upcoming.count}}) Tasks are Upcoming
+    {{/paper-button}}
+    {{#paper-button}}
+      {{paper-icon statusCount.onTrack.label}} ({{statusCount.onTrack.count}}) Tasks are OnTrack
+    {{/paper-button}}
+  {{/paper-toolbar-tools}}
+{{/paper-toolbar}}
 {{#paper-card as |card|}}
   {{#card.title as |title|}}
     {{#title.text as |text|}}
