@@ -1,34 +1,89 @@
 {{#if isAuthenticated}}
   <div class="app-centre">
-    <div>
-      {{pie-chart class="chart-container" options=options1 data=countsByStatus responsiveResize=false}}
-      {{paper-divider}}
-    </div>
-    <div>
-      {{bar-chart class="chart-container" options=options2 data=countsByMemoCount responsiveResize=false}}
-      {{paper-divider}}
-    </div>
-    <div>
-      {{pie-chart class="chart-container" options=options3 data=countsByCompletedOnTime responsiveResize=false}}
-      {{paper-divider}}
-    </div>
-    <div class="bg-white">
-      Toggle timeline type: {{#paper-radio-group
-        groupValue=(readonly timelineType)
-        onChange=(action "toggleTimelineType") as |group|}}
-        {{#group.radio class="display-inline" value="days" primary=true}} Days {{/group.radio}}
-        {{#group.radio class="display-inline" value="weeks" warn=true}} Weeks {{/group.radio}}
-        {{#group.radio class="display-inline" value="months"}} Months {{/group.radio}}
-      {{/paper-radio-group}}
-      {{scatter-chart class="chart-container" options=options4 data=countsByDate responsiveResize=false}}
-      {{paper-divider}}
-    </div>
-    <div>
-      {{bar-chart class="chart-container" options=options5 data=countsByDuration responsiveResize=false}}
-      {{paper-divider}}
-    </div>
+    {{#paper-card as |card|}}
+      {{#paper-toolbar}}
+        {{#paper-toolbar-tools}}
+          <h2>
+            {{options1.title}}
+          </h2>
+        {{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
+      {{#card.content}}
+        <div>
+          {{pie-chart class="chart-container" options=options1 data=countsByStatus responsiveResize=false}}
+          {{paper-divider}}
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    {{#paper-card as |card|}}
+      {{#paper-toolbar}}
+        {{#paper-toolbar-tools}}
+          <h2>
+            {{options2.title}}
+          </h2>
+        {{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
+      {{#card.content}}
+        <div>
+          {{bar-chart class="chart-container" options=options2 data=countsByMemoCount responsiveResize=false}}
+          {{paper-divider}}
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    {{#paper-card as |card|}}
+      {{#paper-toolbar}}
+        {{#paper-toolbar-tools}}
+          <h2>
+            {{options3.title}}
+          </h2>
+        {{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
+      {{#card.content}}
+        <div>
+          {{pie-chart class="chart-container" options=options3 data=countsByCompletedOnTime responsiveResize=false}}
+          {{paper-divider}}
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    {{#paper-card as |card|}}
+      {{#paper-toolbar}}
+        {{#paper-toolbar-tools}}
+          <h2>
+            {{options4.title}}
+          </h2>
+        {{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
+      {{#card.content}}
+        <div class="bg-white">
+          Toggle timeline type: {{#paper-radio-group
+            groupValue=(readonly timelineType)
+            onChange=(action "toggleTimelineType") as |group|}}
+            {{#group.radio class="display-inline" value="days" primary=true}} Days {{/group.radio}}
+            {{#group.radio class="display-inline" value="weeks" warn=true}} Weeks {{/group.radio}}
+            {{#group.radio class="display-inline" value="months"}} Months {{/group.radio}}
+          {{/paper-radio-group}}
+          {{scatter-chart class="chart-container" options=options4 data=countsByDate responsiveResize=false}}
+          {{paper-divider}}
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
+    {{#paper-card as |card|}}
+      {{#paper-toolbar}}
+        {{#paper-toolbar-tools}}
+          <h2>
+            {{options5.title}}
+          </h2>
+        {{/paper-toolbar-tools}}
+      {{/paper-toolbar}}
+      {{#card.content}}
+        <div>
+          {{bar-chart class="chart-container" options=options5 data=countsByDuration responsiveResize=false}}
+          {{paper-divider}}
+        </div>
+      {{/card.content}}
+    {{/paper-card}}
   </div>
 {{else}}
-  <div class="app-centre"> You should be authenticated to view this page!! </div> 
+  <div class="app-centre"> You should be authenticated to view this page!! </div>
 {{/if}}
 {{yield}}
