@@ -2,7 +2,6 @@
   <span>Logged in as {{session.currentUser.displayName}}</span>
   {{#paper-button primary=true onClick=(action "logout")}}Sign out with Github{{/paper-button}}
 {{else}}
-
   {{#paper-button primary=true onClick=(action "login" "github")}}Sign in with Github {{/paper-button}}
 {{/if}}
 
