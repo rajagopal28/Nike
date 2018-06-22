@@ -36,25 +36,28 @@
     isLockedOpen=leftSideBarLockedOpen
     onToggle=(action (mut leftSideBarOpen))}}
     {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}  {{#paper-button onClick=(action "transitionTo" "tasks")}} Home {{/paper-button}}{{/paper-toolbar-tools}}
+      {{#paper-toolbar-tools}}  {{#paper-button onClick=(action "transitionTo" "home")}} Home {{/paper-button}}{{/paper-toolbar-tools}}
     {{/paper-toolbar}}
     {{#paper-content padding=true}}
       {{#paper-list}}
-        {{#paper-item}}
-          {{#paper-button onClick=(action "transitionTo" "home")}}Home{{/paper-button}}
-        {{/paper-item}}
-        {{#paper-item}}
-          {{#paper-button onClick=(action "transitionTo" "dashboard")}}Dashboard Link{{/paper-button}}
-        {{/paper-item}}
-        {{#paper-item}}
-          {{#paper-button onClick=(action "transitionTo" "labels")}}Labels Link{{/paper-button}}
-        {{/paper-item}}
-        {{#paper-item}}
-         {{#paper-button onClick=(action "transitionTo" "tasks")}} Tasks Link{{/paper-button}}
-        {{/paper-item}}
-        {{#paper-item}}
-         {{#paper-button onClick=(action "transitionTo" "users")}} Users Link{{/paper-button}}
-        {{/paper-item}}
+        {{#if isAuthenticated}}
+          {{#paper-item}}
+            {{#paper-button onClick=(action "transitionTo" "dashboard")}}Dashboard{{/paper-button}}
+          {{/paper-item}}
+          {{#paper-item}}
+            {{#paper-button onClick=(action "transitionTo" "labels")}}Labels{{/paper-button}}
+          {{/paper-item}}
+          {{#paper-item}}
+           {{#paper-button onClick=(action "transitionTo" "tasks")}}Tasks{{/paper-button}}
+          {{/paper-item}}
+          {{#paper-item}}
+           {{#paper-button onClick=(action "transitionTo" "users")}}Users{{/paper-button}}
+          {{/paper-item}}
+        {{else}}
+          {{#paper-item}}
+           {{#paper-button disabled=true }} You are not authenticated{{/paper-button}}
+          {{/paper-item}}
+        {{/if}}
      {{/paper-list}}
     {{/paper-content}}
   {{/paper-sidenav}}
