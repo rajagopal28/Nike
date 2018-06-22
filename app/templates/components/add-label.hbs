@@ -1,3 +1,8 @@
+{{#paper-toolbar accent=true}}
+  {{#paper-toolbar-tools}}
+    <h2> Add new Label</h2>
+   {{/paper-toolbar-tools}}
+{{/paper-toolbar}}
 <div class="layout layout-sm-column">
   {{paper-input class="flex" label="Label text" type="text" value=displayText onChange=(action (mut displayText))}}
   {{#paper-button primary=true onClick=(action "addLabel")}}Add Label{{/paper-button}}
