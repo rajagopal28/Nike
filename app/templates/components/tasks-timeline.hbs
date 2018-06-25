@@ -1,22 +1,23 @@
-{{#paper-toolbar accent=true}}
-  {{#paper-toolbar-tools}}
-    {{#paper-button onClick=(action "addTaskDialog")}}
-      {{paper-icon "add"}} Add new Task
-    {{/paper-button}}
-    {{#paper-button}}
-      {{paper-icon statusCount.tooLate.label}} ({{statusCount.tooLate.count}}) Tasks are Ways Past OverDue
-    {{/paper-button}}
-    {{#paper-button }}
-      {{paper-icon statusCount.late.label}} ({{statusCount.late.count}}) Tasks are OverDue
-    {{/paper-button}}
-    {{#paper-button}}
-      {{paper-icon statusCount.upcoming.label}} ({{statusCount.upcoming.count}}) Tasks are Upcoming
-    {{/paper-button}}
-    {{#paper-button}}
-      {{paper-icon statusCount.onTrack.label}} ({{statusCount.onTrack.count}}) Tasks are OnTrack
-    {{/paper-button}}
-  {{/paper-toolbar-tools}}
-{{/paper-toolbar}}
+{{#unless disableFiltering}}
+  {{#paper-toolbar accent=true}}
+    {{#paper-toolbar-tools}}
+      {{#paper-button onClick=(action "addTaskDialog")}}
+        {{paper-icon "add"}} Add new Task
+      {{/paper-button}}
+      {{#paper-button}}
+        {{paper-icon statusCount.tooLate.label}} ({{statusCount.tooLate.count}}) Tasks are Ways Past OverDue
+      {{/paper-button}}
+      {{#paper-button }}
+        {{paper-icon statusCount.late.label}} ({{statusCount.late.count}}) Tasks are OverDue
+      {{/paper-button}}
+      {{#paper-button}}
+        {{paper-icon statusCount.upcoming.label}} ({{statusCount.upcoming.count}}) Tasks are Upcoming
+      {{/paper-button}}
+      {{#paper-button}}
+        {{paper-icon statusCount.onTrack.label}} ({{statusCount.onTrack.count}}) Tasks are OnTrack
+      {{/paper-button}}
+    {{/paper-toolbar-tools}}
+  {{/paper-toolbar}}
 {{#paper-card as |card|}}
   {{#card.title as |title|}}
     {{#title.text as |text|}}
@@ -24,7 +25,6 @@
     {{/title.text}}
   {{/card.title}}
   {{#card.content}}
-    {{#unless disableFiltering}}
       <div class="layout layout-sm-column">
         {{#paper-chips
           readOnly=false
@@ -49,13 +49,13 @@
           {{status}}
         {{/paper-select}}
       </div>
-    {{/unless}}
   {{/card.content}}
   {{#card.actions}}
     {{#paper-button primary=true onClick=(action "applyFilter")}}Filter{{/paper-button}}
     {{#paper-button primary=false onClick=(action "resetFilter")}}Reset{{/paper-button}}
   {{/card.actions}}
 {{/paper-card}}
+{{/unless}}
 <h2 class="centre">Activity Timeline</h2>
 {{#vertical-timeline animate=true as |timeline|}}
   {{#each filteredTasks as |task index|}}
