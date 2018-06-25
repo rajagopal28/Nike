@@ -5,15 +5,15 @@ Often we end up losing track of one or more goals that we define for us, from ti
 
 ## Major use cases:
 The major intend of this application is to track your goals based on timelines, diligently. We have the following 4 major aspects in this application.
- - Users - Read only view of all the users who are accessing the system.
- - Dashboard - A simple visualization of your activities in this application categorized as following
+ - **Users** - Read only view of all the users who are accessing the system.
+ - **Dashboard** - A simple visualization of your activities in this application categorized as following
   - active tasks - based on memo count in it (most active, normal, lazy)
 	- completed before timeline, count based on how many days early the completion is (bar)
 	- tasks that have not been completed even after deadline( days, week, earlier than that)
 	- tasks that have changed the deadline time to later( days, week, more than that)
- - Tasks - A timeline based representation of your to-do's and goals. You can add/update/delete tasks
- - Labels - You can define your own categories under which your tasks should be categorized
- - Memos - You can add memos/logs for each of the tasks so that you can track your progress on a minute time line basis.
+ - **Tasks** - A timeline based representation of your to-do's and goals. You can add/update/delete tasks
+ - **Labels** - You can define your own categories under which your tasks should be categorized
+ - **Memos** - You can add memos/logs for each of the tasks so that you can track your progress on a minute time line basis.
 ## User Views:
 ### Home:
 ![Home](https://file.ac/EFrrZnCjY9M/image010.png)
@@ -27,12 +27,12 @@ The major intend of this application is to track your goals based on timelines, 
 ![Dashboard](https://file.ac/EFrrZnCjY9M/image203.png)
 ![Dashboard](https://file.ac/EFrrZnCjY9M/image204.png)
 ![Dashboard](https://file.ac/EFrrZnCjY9M/image205.png)
-###Tasks:
+### Tasks:
 ![Tasks](https://file.ac/EFrrZnCjY9M/image300.png)
 ![Tasks](https://file.ac/EFrrZnCjY9M/image301.png)
 ![Tasks](https://file.ac/EFrrZnCjY9M/image302.png)
 ![Tasks](https://file.ac/EFrrZnCjY9M/image303.png)
-###Labels:
+### Labels:
 ![Labels](https://file.ac/EFrrZnCjY9M/image002.png)
 ![Labels](https://file.ac/EFrrZnCjY9M/image401.png)
 ![Labels](https://file.ac/EFrrZnCjY9M/image402.png)
