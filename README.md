@@ -1,5 +1,5 @@
 # Nike
-Ember based UI application, with the tag line 'Just do it', with an intend to built a timeline based todo application.
+Ember based UI application, with the tag line 'Just do it', with an intend to build a timeline based todo application.
 ## Inspiration
 Often we end up losing track of one or more goals that we define for us, from time to time. These goals can be small or huge based on factors such as time to achieve, effort taken and amount of difficulties we go through to complete them. I wanted to create a simple UI based application to keep track of your tasks by categorizing them accordingly and to have a visual effect on your progress.
 
