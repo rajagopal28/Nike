@@ -19,12 +19,21 @@
           {{/paper-button}}
         {{/menu.trigger}}
         {{#menu.content width=2 as |content|}}
-          {{#content.menu-item onClick="updateProfileDialog"}}
-            {{paper-icon "face"}} Update Profile
+          {{#content.menu-item onClick=(action "transitionTo" "users")}}
+            {{paper-icon "face"}} User Profiles
           {{/content.menu-item}}
         {{/menu.content}}
       {{/paper-menu}}
+    {{else}}
+      {{#paper-button iconButton=true onClick=(action "login")}}
+        {{paper-icon "exit-to-app"}}
+        {{#paper-tooltip}}Login{{/paper-tooltip}}
+      {{/paper-button}}
     {{/if}}
+    {{#paper-button mini=true aria-label="Repo" href="https://github.com/rajagopal28/Nike" target="_blank"}}
+      {{paper-icon "favorite"}}
+      {{#paper-tooltip}}Git Repo{{/paper-tooltip}}
+    {{/paper-button}}
   {{/paper-toolbar-tools}}
 {{/paper-toolbar}}
 {{#paper-sidenav-container class="inner-sidenav"}}

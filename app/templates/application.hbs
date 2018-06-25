@@ -1,6 +1,6 @@
-{{#navigation-component signOutAction=(route-action "signOut") isAuthenticated=session.isAuthenticated}}
+{{#navigation-component signOutAction=(route-action "signOut") loginAction=(route-action "signIn") isAuthenticated=session.isAuthenticated}}
 <div class="layout-fill layout-align-start-center app-background">
   {{outlet}}
-  {{#login-component class="centre" session=session loginAction=(route-action "signIn") session=session logoutAction=(route-action "signOut") }}{{/login-component}}
+  {{#login-component class="centre" session=session loginAction=(route-action "signIn") logoutAction=(route-action "signOut") }}{{/login-component}}
 </div>
 {{/navigation-component}}
