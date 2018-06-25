@@ -9,7 +9,13 @@
   {{#card.content}}
   <div class="layout layout-sm-column">
     {{paper-input class="flex" label="Title Text" type="text" value=task.title onChange=(action (mut task.title))}}
-    {{pikaday-input class="date-picker-input" minDate=task.minDate value=task.dueDateString placeholder="Due date of task" onSelection=(action (mut task.dueDate))}}
+    {{paper-pikaday
+    	class='flex'
+    	label='Due date of task'
+    	yearRange='1900,currentYear'
+      minDate=task.minDate
+      value=task.dueDate
+      placeholder="Due date of task" onChange=(action (mut task.dueDate))}}
   </div>
   {{#unless memoMode}}
     <div class="layout layout-sm-column">

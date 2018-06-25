@@ -49,11 +49,12 @@ export default Ember.Component.extend({
      console.log('in component add task', this.task);
      let now = new Date().getTime();
      let labels = this.get('task.labels').map((la) => la.name);
-     console.log('maped label names', labels)
+     console.log('maped label names', labels);
+     console.log('this.task.dueDate', new Date(this.task.dueDate));
      this.sendAction('addNewTask', {
        title: this.task.title,
        description: this.task.description,
-       dueDate: this.task.dueDate.getTime(),
+       dueDate: new Date(this.task.dueDate).getTime(),
        labels: labels,
        dateCreated: now,
        logs:[],

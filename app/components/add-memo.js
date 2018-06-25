@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   actions: {
     addMemo() {
      console.log('in component add memo', this.memo);
-     let dateCreated = this.memo.dateCreated.getTime();
+     let dateCreated = new Date(this.memo.dateCreated).getTime();
      this.sendAction('addNewMemo', this.get('task'), {
        title: this.memo.title,
        description: this.memo.description,

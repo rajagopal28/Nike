@@ -57,7 +57,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-new-computed": "^1.0.3",
     "ember-paper": "^1.0.0-beta.2",
-    "ember-pikaday": "^2.2.3",
+    "ember-paper-pikaday": "^2.0.1",
     "ember-resolver": "^4.0.0",
     "ember-route-action-helper": "^2.0.5",
     "ember-source": "~2.14.1",

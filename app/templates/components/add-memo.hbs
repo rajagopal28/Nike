@@ -11,7 +11,14 @@
   </div>
   <div class="layout layout-sm-column">
     {{paper-input class="flex" label="Description Text" type="text" value=memo.description onChange=(action (mut memo.description))}}
-    {{pikaday-input class="flex date-picker-input" minDate=memo.minDate value=memo.dateCreatedString placeholder="Date of memo" onSelection=(action (mut memo.dateCreated))}}
+    {{paper-pikaday
+    	class='flex'
+    	label='Due date of memo'
+    	yearRange='1900,currentYear'
+      minDate=memo.minDate
+      value=memo.dateCreated
+      placeholder="Date of memo"
+      onChange=(action (mut memo.dateCreated))}}
   </div>
   {{/card.content}}
 {{/paper-card}}
