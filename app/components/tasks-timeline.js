@@ -23,7 +23,10 @@ export default Ember.Component.extend({
   },
   didInsertElement() {
     this.filterTasksWithLabels();
-    this.setAnalyticsOfTasksNeedingAttention();
+    if(!this.disableFiltering) {
+      // memo mode has disableFiltering=true
+      this.setAnalyticsOfTasksNeedingAttention();
+    }
   },
   filterTasksWithLabels(){
     let filteredTasks = this.get('tasks');

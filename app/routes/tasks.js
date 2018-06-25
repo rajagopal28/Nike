@@ -44,7 +44,7 @@ export default Ember.Route.extend(FindQuery, {
      }
      taskRecord.save();
      if(isTimeChanged) {
-       this.sortAndSaveTasks();
+       this.send("sortAndSaveTasks");
      }
    },
    deleteTaskItem(task) {
@@ -67,7 +67,9 @@ export default Ember.Route.extend(FindQuery, {
    },
    sortAndSaveTasks() {
      let user = this.get('authentication').getUser();
-     user.get('tasks').sort((a, b) => a.get('dueDate') - b.get('dueDate'));
+     console.log('user tasks', user.get('tasks'));
+     let updatedTasks = user.get('tasks').sortBy('dueDate');
+     user.set('tasks', updatedTasks);
      user.save();
    },
    viewTaskItem(task) {
