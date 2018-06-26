@@ -65,6 +65,7 @@ export default Ember.Component.extend({
        }
        return ag;
      });
+     data = data || {};
      let countsByCompletedOnTime = [['Time Completed', 'Count']];
      categories.forEach((key) => {
        countsByCompletedOnTime.push([key, data[key]]);
@@ -101,6 +102,7 @@ export default Ember.Component.extend({
        }
        return ag;
      });
+     data = data || {};
      let countsByMemoCount = [['Activity Status', 'Count']];
      categories.forEach((key) => {
        countsByMemoCount.push([key, data[key]]);
@@ -136,6 +138,7 @@ export default Ember.Component.extend({
        ag[timeKey] += 1;
        return ag;
      });
+     data = data || {};
      let countsByDate = [['Time Period', 'Count']];
      Object.keys(data).sort().forEach((key) => {
        countsByDate.push([key, data[key]]);
@@ -170,6 +173,7 @@ export default Ember.Component.extend({
        }
        return ag;
      });
+     data = data || {};
      let countsByDuration = [['Duration Type', 'Count']];
      categories.forEach((key) => {
        countsByDuration.push([key, data[key]]);
