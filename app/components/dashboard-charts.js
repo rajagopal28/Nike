@@ -115,7 +115,6 @@ export default Ember.Component.extend({
    setDataForChartGroupCountByDate() {
      let timelineType = this.get('timelineType');
      let data = this.data.reduce((ag, item) =>{
-       let memoCount = item.get('logs').length || 0;
        let dueDate = new Date(item.get('dueDate'));
        dueDate.setHours(0, 0, 0, 0);
        let dateString = dueDate.toDateString();
@@ -151,7 +150,6 @@ export default Ember.Component.extend({
    setDataForChartGroupCountByEndDuration() {
      let categories = ['Short', 'Medium', 'Long'];
      let data = this.data.reduce((ag, item) =>{
-       let memoCount = item.get('logs').length || 0;
        let dueDate = new Date(item.get('dueDate'));
        let dateCreated = new Date(item.get('dateCreated'));
        dueDate.setHours(0, 0, 0, 0);

@@ -32,7 +32,7 @@ export default Ember.Route.extend({
     deleteMemoItem(memo) {
       this.store.find('memo', memo.id).then((foundMemo) => {
         let taskId = memo.get('taskId');
-        foundMemo.destroyRecord().then((rec) => {
+        foundMemo.destroyRecord().then(() => {
           this.store.find('task', taskId).then((foundTask) => {
             let deletions = foundTask.get('logs').map((l) => {
               return l.id === memo.id ? l.destroyRecord() : false;
@@ -45,7 +45,7 @@ export default Ember.Route.extend({
       });
     },
     viewMemoItem(memo) {
-      // this.transitionTo('task', task.get('id'));
+      console.log('viewing memo', memo);
     }
   }
 });

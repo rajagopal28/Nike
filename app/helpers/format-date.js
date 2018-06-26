@@ -8,6 +8,7 @@ export function formatDate([value, ...rest], hash) {
     "August", "September", "October",
     "November", "December"
   ];
+  console.log('hash', hash);
 
   var day = date.getDate();
   var monthIndex = date.getMonth();
