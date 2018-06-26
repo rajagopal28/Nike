@@ -18,9 +18,9 @@ export default Ember.Component.extend({
         title: this.get('inputMemo.title'),
         description: this.get('inputMemo.description'),
         dateCreatedString: dateCreated.toISOString().slice(0, 10),
-        labels: labels,
         dateCreated: dateCreated,
-        minDate: new Date()
+        minDate: new Date(),
+        taskId:  this.get('inputMemo.taskId')
       };
     }
     this.set('memo', memo);
