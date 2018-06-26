@@ -49,21 +49,30 @@ export default Ember.Route.extend(FindQuery, {
    },
    deleteTaskItem(task) {
     let user = this.get('authentication').getUser();
-     this.store.find('task', task.id).then((found) => {
-       found.destroyRecord().then(() => {
-         var deletions = user.get('tasks').map((t) => {
-           return t.id === task.id ? t.destroyRecord() : false;
-          });
-          Ember.RSVP.all(deletions)
-            .then(function() {
-            return user.save();
-          })
-          .catch(function(e) {
-            // Handle errors
-            console.log('ERROR in delete Task CALL:', e);
-          });
+    this.send('deleteMemosOfTask', task, () => {
+      this.store.find('task', task.id).then((found) => {
+        found.destroyRecord().then(() => {
+          var deletions = user.get('tasks').map((t) => {
+            return t.id === task.id ? t.destroyRecord() : false;
+           });
+           Ember.RSVP.all(deletions)
+            .then(() => user.save())
+            .catch(function(e) {
+              // Handle errors
+              console.log('ERROR in delete Task CALL:', e);
+            });
+        });
+      });
+    });
+   },
+   deleteMemosOfTask(task, cb) {
+     var deletions = task.get('logs').map((l) => l.destroyRecord());
+     Ember.RSVP.all(deletions)
+       .then(() => cb())
+       .catch(function(e) {
+         // Handle errors
+         console.log('ERROR in delete MEMO CALL:', e);
        });
-     });
    },
    sortAndSaveTasks() {
      let user = this.get('authentication').getUser();
