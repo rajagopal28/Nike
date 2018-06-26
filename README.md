@@ -7,7 +7,7 @@ Often we end up losing track of one or more goals that we define for us, from ti
 The major intend of this application is to track your goals based on timelines, diligently. We have the following 4 major aspects in this application.
  - **Users** - Read only view of all the users who are accessing the system.
  - **Dashboard** - A simple visualization of your activities in this application categorized as following
-  - active tasks - based on memo count in it (most active, normal, lazy)
+ 	- active tasks - based on memo count in it (most active, normal, lazy)
 	- completed before timeline, count based on how many days early the completion is (bar)
 	- tasks that have not been completed even after deadline( days, week, earlier than that)
 	- tasks that have changed the deadline time to later( days, week, more than that)
