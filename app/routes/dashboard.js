@@ -7,7 +7,7 @@ export default Ember.Route.extend({
      console.log('inside model if... dashboard');
      let authService = this.get('authentication');
      let user = authService.getUser();
-     return user.get('tasks');
+     return user ? user.get('tasks') : [];
    }
    return {};
  },

@@ -9,7 +9,7 @@ export default Ember.Route.extend(FindQuery, {
      let authService = this.get('authentication');
      let user = authService.getUser();
      return Ember.RSVP.hash({
-      tasks: user ? user.get('tasks').sortBy('dueDate') : [],
+      tasks: user ? user.get('tasks') : [],
       labels: this.store.findAll('label'),
     });
    }
