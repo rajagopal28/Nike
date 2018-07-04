@@ -9,7 +9,7 @@ export default Ember.Route.extend(FindQuery, {
      let authService = this.get('authentication');
      let user = authService.getUser();
      return Ember.RSVP.hash({
-      tasks: user ? user.get('tasks') : [],
+      tasks: user ? user.get('tasks').sortBy('dueDate') : [],
       labels: this.store.findAll('label'),
     });
    }
@@ -28,12 +28,10 @@ export default Ember.Route.extend(FindQuery, {
      let user = this.get('authentication').getUser();
      let taskItem = this.store.createRecord('task', task);
      user.get('tasks').addObject(taskItem);
-     taskItem.save().then(() => user.save().then(() => this.send("sortAndSaveTasks")));
+     taskItem.save().then(() => user.save());
    },
    updateTaskItem(taskRecord, updatedTaskContent) {
-     let isTimeChanged = false;
      if(updatedTaskContent) {
-      isTimeChanged = taskRecord.get('dueDate') !== updatedTaskContent.dueDate;
       taskRecord.set('title',updatedTaskContent.title);
       taskRecord.set('description',updatedTaskContent.description);
       taskRecord.set('dueDate',updatedTaskContent.dueDate);
@@ -43,9 +41,6 @@ export default Ember.Route.extend(FindQuery, {
       taskRecord.set('labels',updatedTaskContent.labels);
      }
      taskRecord.save();
-     if(isTimeChanged) {
-       this.send("sortAndSaveTasks");
-     }
    },
    deleteTaskItem(task) {
     let user = this.get('authentication').getUser();
@@ -73,13 +68,6 @@ export default Ember.Route.extend(FindQuery, {
          // Handle errors
          console.log('ERROR in delete MEMO CALL:', e);
        });
-   },
-   sortAndSaveTasks() {
-     let user = this.get('authentication').getUser();
-     console.log('user tasks', user.get('tasks'));
-     let updatedTasks = user.get('tasks').sortBy('dueDate');
-     user.set('tasks', updatedTasks);
-     user.save();
    },
    viewTaskItem(task) {
      this.transitionTo('task', task.get('id'));
