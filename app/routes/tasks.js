@@ -28,7 +28,7 @@ export default Ember.Route.extend(FindQuery, {
      let user = this.get('authentication').getUser();
      let taskItem = this.store.createRecord('task', task);
      user.get('tasks').addObject(taskItem);
-     taskItem.save().then(() => user.save());
+     taskItem.save().then(() => user.save().then(() => this.send("sortAndSaveTasks")));
    },
    updateTaskItem(taskRecord, updatedTaskContent) {
      let isTimeChanged = false;
