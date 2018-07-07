@@ -2,6 +2,11 @@
 Ember based UI application, with the tag line 'Just do it', with an intend to build a timeline based todo application.
 ## Inspiration
 Often we end up losing track of one or more goals that we define for us, from time to time. These goals can be small or huge based on factors such as time to achieve, effort taken and amount of difficulties we go through to complete them. I wanted to create a simple UI based application to keep track of your tasks by categorizing them accordingly and to have a visual effect on your progress.
+## Tech Nuances:
+Following are the tech nuances about this app that I am proud of achieving.
+- **Github SSO with Torii** - with the concept of adapter services in ember I just integrated firebase authentication with github account.
+- **Route only handles store** - I have heard and read about the best practices in ember data and one major guideline was to not manipulate store in a component and bubble to routes instead. Thanks fully emberfire works on ember data store to handle the data from firebase. I made sure that all the action in components and nested components are bubbled up to route and perform insert/update and read data is always passed to all the components and sub-components in the route.
+- **Relationships between data models** - This app did not have too much of data models but the concept of users owning tasks and tasks containing memos mean they are are referenced within each other and they should be dereferenced. But luckily emberfire helps so much in de-referencing the nested objects.
 
 ## Major use cases:
 The major intend of this application is to track your goals based on timelines, diligently. We have the following 4 major aspects in this application.
