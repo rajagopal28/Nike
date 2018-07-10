@@ -9,7 +9,7 @@ Following are the tech nuances about this app that I am proud of achieving.
 ![DataFlow](https://file.ac/EFrrZnCjY9M/image006.png)
 - **Relationships between data models** - This app did not have too much of data models but the concept of users owning tasks and tasks containing memos mean they are are referenced within each other and they should be dereferenced. But luckily emberfire helps so much in de-referencing the nested objects.
 - **Firebase as data server** - This app involves no server, technically. Direct connectors to firebase helps the application in persisting and retrieving data. This application is pure UI and firebase provides json based datastore along with a server which is realtime as it is backed by websockets.
-![Architecture](https://file.ac/EFrrZnCjY9M/image007.png)
+![Architecture](https://file.ac/EFrrZnCjY9M/image007.png?refresh=true)
 - **Google Charts with ember** - To add spice to the task tracking system. I just added charting visualization for various metrics with the tasks and activity logging to give a graphical view of the user's activities and interests towards various tasks. I have achived this by using ember-googlecharts which has a ember wrapper around google chart visualization.
 
 ## Major use cases:
