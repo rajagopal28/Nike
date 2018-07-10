@@ -6,10 +6,10 @@ Often we end up losing track of one or more goals that we define for us, from ti
 Following are the tech nuances about this app that I am proud of achieving.
 - **Github SSO with Torii** - with the concept of adapter services in ember I just integrated firebase authentication with github account.
 - **Route only handles store** - I have heard and read about the best practices in ember data and one major guideline was to not manipulate store in a component and bubble to routes instead. Thanks fully emberfire works on ember data store to handle the data from firebase. I made sure that all the action in components and nested components are bubbled up to route and perform insert/update and read data is always passed to all the components and sub-components in the route.
-![DataFlow](https://file.ac/EFrrZnCjY9M/image006.png)
+![DataFlow](https://file.ac/EFrrZnCjY9M/image006.png?refresh=true)
 - **Relationships between data models** - This app did not have too much of data models but the concept of users owning tasks and tasks containing memos mean they are are referenced within each other and they should be dereferenced. But luckily emberfire helps so much in de-referencing the nested objects.
 - **Firebase as data server** - This app involves no server, technically. Direct connectors to firebase helps the application in persisting and retrieving data. This application is pure UI and firebase provides json based datastore along with a server which is realtime as it is backed by websockets.
-![Architecture](https://file.ac/EFrrZnCjY9M/image007.png?refresh=true)
+![Architecture](https://file.ac/EFrrZnCjY9M/image007.png)
 - **Google Charts with ember** - To add spice to the task tracking system. I just added charting visualization for various metrics with the tasks and activity logging to give a graphical view of the user's activities and interests towards various tasks. I have achived this by using ember-googlecharts which has a ember wrapper around google chart visualization.
 
 ## Major use cases:
