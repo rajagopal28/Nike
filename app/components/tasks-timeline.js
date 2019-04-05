@@ -2,8 +2,8 @@ import Ember from 'ember';
 import { inject as service } from '@ember/service';
 
 export default Ember.Component.extend({
-  imageURLOdd : 'https://codyhouse.co/demo/vertical-timeline/img/cd-icon-picture.svg',
-  imageURLEven: 'https://codyhouse.co/demo/vertical-timeline/img/cd-icon-movie.svg',
+  imageURLOdd : 'https://file.ac/EFrrZnCjY9M/cd-icon-picture.svg',
+  imageURLEven: 'https://file.ac/EFrrZnCjY9M/cd-icon-movie.svg',
   taskService: service('task-service'),
   selectedTask: null,
   showDeleteWarning: false,
