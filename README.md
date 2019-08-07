@@ -6,10 +6,10 @@ Often we end up losing track of one or more goals that we define for us, from ti
 Following are the tech nuances about this app that I am proud of achieving.
 - **Github SSO with Torii** - with the concept of adapter services in ember I just integrated firebase authentication with github account.
 - **Route only handles store** - I have heard and read about the best practices in ember data and one major guideline was to not manipulate store in a component and bubble to routes instead. Thanks fully emberfire works on ember data store to handle the data from firebase. I made sure that all the action in components and nested components are bubbled up to route and perform insert/update and read data is always passed to all the components and sub-components in the route.
-![DataFlow](https://file.ac/EFrrZnCjY9M/image006.png?refresh=true&timeout=10)
+![DataFlow](./images/image006.png)
 - **Relationships between data models** - This app did not have too much of data models but the concept of users owning tasks and tasks containing memos mean they are are referenced within each other and they should be dereferenced. But luckily emberfire helps so much in de-referencing the nested objects.
 - **Firebase as data server** - This app involves no server, technically. Direct connectors to firebase helps the application in persisting and retrieving data. This application is pure UI and firebase provides json based datastore along with a server which is realtime as it is backed by websockets.
-![Architecture](https://file.ac/EFrrZnCjY9M/image007.png?refresh=true&timeout=10)
+![Architecture](./images/image007.png)
 - **Google Charts with ember** - To add spice to the task tracking system. I just added charting visualization for various metrics with the tasks and activity logging to give a graphical view of the user's activities and interests towards various tasks. I have achived this by using ember-googlecharts which has a ember wrapper around google chart visualization.
 
 ## Major use cases:
@@ -25,31 +25,30 @@ The major intend of this application is to track your goals based on timelines, 
  - **Memos** - You can add memos/logs for each of the tasks so that you can track your progress on a minute time line basis.
 ## User Views:
 ### Home:
-![Home](https://file.ac/EFrrZnCjY9M/image010.png)
-![Home](https://file.ac/EFrrZnCjY9M/image011.png)
-![Home](https://file.ac/EFrrZnCjY9M/image012.png)
+![Home](./images/image010.png)
+![Home](./images/image011.png)
+![Home](./images/image012.png)
 ### Users:
-![Users](https://file.ac/EFrrZnCjY9M/image101.png)
+![Users](./images/image101.png)
 ### Dashboard:
-![Dashboard](https://file.ac/EFrrZnCjY9M/image201.png)
-![Dashboard](https://file.ac/EFrrZnCjY9M/image201.png)
-![Dashboard](https://file.ac/EFrrZnCjY9M/image203.png)
-![Dashboard](https://file.ac/EFrrZnCjY9M/image204.png)
-![Dashboard](https://file.ac/EFrrZnCjY9M/image205.png)
+![Dashboard](./images/image201.png)
+![Dashboard](./images/image201.png)
+![Dashboard](./images/image203.png)
+![Dashboard](./images/image204.png)
+![Dashboard](./images/image205.png)
 ### Tasks:
-![Tasks](https://file.ac/EFrrZnCjY9M/image300.png)
-![Tasks](https://file.ac/EFrrZnCjY9M/image301.png)
-![Tasks](https://file.ac/EFrrZnCjY9M/image302.png)
-![Tasks](https://file.ac/EFrrZnCjY9M/image303.png)
+![Tasks](./images/image301.png)
+![Tasks](./images/image302.png)
+![Tasks](./images/image303.png)
+![Tasks](./images/image304.png)
 ### Labels:
-![Labels](https://file.ac/EFrrZnCjY9M/image002.png)
-![Labels](https://file.ac/EFrrZnCjY9M/image401.png)
-![Labels](https://file.ac/EFrrZnCjY9M/image402.png)
+![Labels](./images/image401.png)
+![Labels](./images/image402.png)
+![Labels](./images/image403.png)
 ### Memos:
-![Memos](https://file.ac/EFrrZnCjY9M/image501.png)
-![Memos](https://file.ac/EFrrZnCjY9M/image502.png)
-![Memos](https://file.ac/EFrrZnCjY9M/image503.png)
-![Memos](https://file.ac/EFrrZnCjY9M/image504.png)
+![Memos](./images/image501.png)
+![Memos](./images/image502.png)
+![Memos](./images/image503.png)
 
 ## Access to Application:
 This site has restricted access. You can visit the site [Here](https://rajagopal28.github.io/Nike/). You can only login with your github account as this site is integrated with github-firebase single sign-on. You need to have explicit access provided by the Author(Rajagopal.M) to add/view data in this application. Try to login for the first time. Send email to rajagopal.a.dinesh.28@gmail.com to get your git hub account whitelisted :) .
