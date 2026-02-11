@@ -44,7 +44,7 @@
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-moment-shim": "^3.4.0",
     "ember-cli-qunit": "^4.0.0",
-    "ember-cli-sass": "^7.0.0",
+    "ember-cli-sass": "^11.0.1",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
@@ -65,7 +65,7 @@
     "ember-truth-helpers": "^1.2.0",
     "ember-vertical-timeline": "0.0.10",
     "emberfire": "^2.0.7",
-    "gulp-sass": "^3.1.0",
+    "gulp-sass": "^6.0.1",
     "loader.js": "^4.2.3",
     "moment": "^2.18.1",
     "torii": "^0.9.6"
